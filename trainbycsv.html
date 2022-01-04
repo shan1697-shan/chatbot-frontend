@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $(".menuicon").click(function () {
+                $(".leftnav").toggle();
+            });
+        });
+		
+		$(document).ready(function () {
+        if (localStorage["adminbot"] == "valid") {
+          var username = localStorage["username"];
+          document.getElementById("username").innerHTML = username;
+          console.log(username);
+        } else {
+     //     window.open("index.html", "_self");
+        }
+      });
+		
+		$(document).ready(function () {
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const authT = urlParams.get('authT');
+		             $.ajax({
+							type: 'GET',
+							url:'https://www.cybot.co/domain',
+						    dataType:'json',
+							processData: false,
+							"headers": {
+					       "Authorization": "Token "+authT+""
+				             },
+							success: function(data) {
+							var client="<option value='' selected disabled hidden>Select Domain</option>";
+			for(var i=0;i<data.length;i++)
+				{				
+				
+				client+=("<option value="+data[i].domain+">"+data[i].domain+"</option>");
+				}			
+			    document.getElementById("domain").innerHTML=client;
+							},
+							error: function(data){
+							alert('Session Expire');
+							//	window.localStorage.removeItem('test');
+							//	window.open('index.html',"_self");
+							}
+						});
+		
+		
+		
+		});
+				
+		
+	function tableData(result){
+       var datalist =  new Array();
+      for (var i = 0; i < result.length; i++)
+       {
+	   var id = result[i].id;
+            var domains = result[i].domain;
+      var client = result[i].client;
+                   datalist[i] = {"id":id ,"domains":domains,"client":client};
+
+             }
+       return datalist;
+}
+		function reporting(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='reporting.html?authT='+authT;
+	
+	}
+	
+	function domains(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='domains.html?authT='+authT;
+	
+	}
+	
+	function createdomains(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='createdomain.html?authT='+authT;
+	
+	}
+	
+	function viewintent(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='intent.html?authT='+authT;
+	
+	}
+	
+	function addhuman(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='addhumanagent.html?authT='+authT;
+	
+	}
+	
+	function dashboard(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='dashboard.html?authT='+authT;
+	
+	}
+	
+	function faq(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='faq.html?authT='+authT;
+	
+	}
+	
+	function trainbot(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='trainbycsv.html?authT='+authT;
+	
+	}
+	
+	function addagent() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        window.location = "allagent.html?authT=" + authT;
+      }
+	  
+	   function websitelink() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        window.location = "websitelink.html?authT=" + authT;
+      }
+	
+	function quickLinks() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        window.location = "createQuicklinks.html?authT=" + authT;
+      }
+     function logout() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        $.ajax({
+          type: "Get",
+          url: "https://www.cybot.co/api/logout",
+          headers: {
+            Authorization: "Token " + authT + "",
+          },
+          success: function (data) {
+            window.location = "index.html";
+          },
+          error: function (data) {
+            window.location = "index.html";
+          },
+        });
+      }
+		
+    </script>
+	
+    <title>Train Bot For Upload FAQ</title>
+	<style>
+	#tooltip {
+  position: relative;
+ 
+  border-bottom: 1px dotted black;
+}
+
+#tooltip #tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #f5cdcf;
+  color: #130f0f;
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+ 
+  margin-left: -42px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#tooltip #tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+#tooltip:hover #tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+	
+	
+	</style>
+</head>
+<body>
+    <div class="main-container">
+         <div class="left-panel">
+             <div class="logobox"></div>
+             <ul>
+          <li href="" onclick="dashboard()" id ="tooltip">
+            <span class="fa fa-creative-commons" ></span>
+			<span class="tooltiptext" id="tooltiptext">Dashboard</span>
+          </li>
+         
+          <li href="" onclick="domains()" id ="tooltip"><span class="fa fa-book"></span>
+		  
+		  <span class="tooltiptext" id="tooltiptext">Add domains</span>
+		  </li>
+		   <li href="" onclick="quickLinks()" id ="tooltip"><span class="fa fa-link"></span>
+		   <span class="tooltiptext" id="tooltiptext">Quick links</span>
+		   </li>
+          <li href="" onclick="addagent()" id ="tooltip">
+            <span class="fa fa-user-o"></span>
+			<span class="tooltiptext" id="tooltiptext">Add Agents</span>
+          </li>
+          <li href="" onclick="reporting()" id ="tooltip">
+            <span class="fa fa-bar-chart"></span>
+			<span class="tooltiptext" id="tooltiptext">Reporting</span>
+          </li>    
+		  <li href="" onclick="websitelink()" id ="tooltip"><span class="fa fa-globe"></span>
+		  <span class="tooltiptext" id="tooltiptext">website link</span>
+		  </li>
+          <li href="" onclick="faq()" id ="tooltip"><span class="fa fa-upload"></span>
+		  <span class="tooltiptext" id="tooltiptext">Faq upload</span>
+		  
+		  </li>
+		   
+		   <li href="" onclick="trainbot()" id ="tooltip"><span class="fa fa-cube"></span>
+		   
+		   <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+		   
+		   </li>
+		<!--   <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> -->
+          <li href="" onclick="setting()" id ="tooltip"><span class="fa fa-cog"></span>
+		  
+		   <span class="tooltiptext" id="tooltiptext">Setting</span>
+		  </li>
+        </ul>
+         </div><!-- left-panel -->
+         <div class="right-panel right-bg chat-payment">
+		 <div class="right-header">
+             <div class="row">
+                 <div class="col-md-12 borderbtm">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <h1 class="mainheading"><a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a>Train Bot For Upload FAQ 
+</h1>
+                        </div><!-- col-md-5 -->
+                        <div class="col-md-7 rhead-search">
+                            <ul>
+                    <li class="search">
+                      <button class="fa fa-search"></button>
+                      <input type="text" name="" />
+                    </li>
+                    <li><span class="fa fa-gift"></span></li>
+                    <li><span class="fa fa-bell-o"></span></li>
+                    <li class="profile">
+                      <span class="profile-symble" ></span
+                      ><span class="fa fa-angle-down"></span>
+                      <ul class="profile-dropdown">
+                        <li>
+                          <a href="#"
+                            ><span class="profileimg"
+                              >N<i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <p id="username"><span>Active</span></p></a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-toggle-on"></span>Set inactive
+                            on IntelliAssign</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-user-o"></span>Profile
+                            Settings</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#" onclick="logout()"
+                            ><span class="fa fa-sign-out"></span> Logout</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                        </div><!-- col-md-7 -->
+                    </div>
+                 </div>
+             </div><!-- row -->
+            </div><!-- right-header -->
+            <div class="dashboard-container">
+              <h1>Train Bot For Upload FAQ</h1> 
+              <div class="newform">
+                <form>
+                  <ul class="newfullfrmbx">
+                    <li>
+                      <label>Select Domain Name </label>
+                      <select name="intent" id="domain"></select>
+                    </li>
+                    
+                                        
+                  </ul>
+                  <div class="text-center form-bottom"><input type="TRAIN BOT" class="green" onclick="submitdata()" value="submit"><!-- <input type="reset" class="red" /> --></div>
+                </form>
+              </div>    
+            </div><!-- dashboard-container -->
+         </div><!-- right-panel --> 
+    </div><!-- main-container -->
+ <script type="text/javascript">
+   
+	function submitdata(){
+	  var domain = document.getElementById("domain").value;
+  const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const authT = urlParams.get('authT');
+     
+	var websitetoken= localStorage["websitetoken"];
+	//alert(websitetoken);
+	alert("Please wait It will take atleast 10 min to Train your  bot");
+	var Data = {"domain": domain,"token":websitetoken}
+	
+	var form = new FormData();
+   form.append("domain", domain);
+   form.append("token", websitetoken);
+   
+		$.ajax({
+		type: 'Get',
+		url:'https://www.cybot.co/train_file?domain='+domain+'&token='+encodeURIComponent(websitetoken),
+		//data: form,
+		dataType:'json',
+		"headers": {
+				"Authorization": "Token "+authT+""
+				   },
+		success: function(data) {
+		//alert(data);
+			//console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+			alert(JSON.stringify(data));
+		},
+		error: function(data){
+			alert('Not Train Due to some error ! Please generate website link first');
+		//	window.localStorage.removeItem('test');
+	//	    window.open('index.html',"_self");
+		}
+
+	});
+
+	}
+	
+	
+	
+	
+</script>
+
+</body>
+</html>

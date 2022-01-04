@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/leftheadernav.js"></script>
+  <title>Get Website Link</title>
+  <style>
+    .div2 {
+      width: 697px;
+      height: 151px;
+      padding: 23px;
+      border: 1px solid red;
+    }
+  </style>
+  <script type="text/javascript">
+    function reporting() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "reporting.html?authT=" + authT;
+    }
+
+    function setting() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "gobalsetting.html?authT=" + authT;
+    }
+
+    function domains() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "domains.html?authT=" + authT;
+    }
+
+    function entity() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "entityview.html?authT=" + authT;
+    }
+
+    function intent() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "intent.html?authT=" + authT;
+    }
+
+    function addhuman() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "addhumanagent.html?authT=" + authT;
+    }
+    function dashboard() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "dashboard.html?authT=" + authT;
+    }
+
+    function faq() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "faq.html?authT=" + authT;
+    }
+    function trainbot() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "trainbycsv.html?authT=" + authT;
+    }
+    function addagent() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "allagent.html?authT=" + authT;
+    }
+
+    function websitelink() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "websitelink.html?authT=" + authT;
+    }
+
+    function quickLinks() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      window.location = "createQuicklinks.html?authT=" + authT;
+    }
+    function logout() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      $.ajax({
+        type: "Get",
+        url: "https://www.cybot.co/api/logout",
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          window.location = "login_1.html";
+        },
+        error: function (data) {
+          window.location = "login_1.html";
+        },
+      });
+    }
+
+    $(document).ready(function () {
+      if (localStorage["adminbot"] == "valid") {
+        console.log(localStorage);
+        var username = localStorage["username"];
+        document.getElementById("username").innerHTML = username;
+        console.log(username);
+      } else {
+        //    window.open("index.html", "_self");
+      }
+    });
+
+    // $(document).ready(function () {
+    //   const queryString = window.location.search;
+    //   const urlParams = new URLSearchParams(queryString);
+    //   const authT = urlParams.get("authT");
+    //   $.ajax({
+    //     type: "GET",
+    //     url: "https://www.cybot.co/domaintokens",
+    //     dataType: "json",
+    //     processData: false,
+    //     headers: {
+    //       Authorization: "Token " + authT + "",
+    //     },
+    //     success: function (data) {
+    //       // console.log("Response");
+    //       console.log(data);
+    //       var client =
+    //         "<option value='' selected disabled hidden>Select Domain</option>";
+    //       for (var i = 0; i < data.length; i++) {
+    //         // console.log(data[i].domain_name + "_" + data[i].token);
+    //         client +=
+    //           "<option value='" +
+    //           data[i].domain_name + "_" + data[i].token +
+    //           "'>" +
+    //           data[i].domain_name +
+    //           "</option>";
+    //       }
+    //       document.getElementById("domain").innerHTML = client;
+    //     },
+    //     error: function (data) {
+    //       alert("Session Expire");
+    //       window.localStorage.removeItem("test");
+    //       window.open("index.html", "_self");
+    //     },
+    //   });
+    // });
+    
+  </script>
+  <style>
+    #tooltip {
+      position: relative;
+      border-bottom: 1px dotted black;
+    }
+
+    #tooltip #tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #f5cdcf;
+      color: #130f0f;
+      text-align: center;
+      border-radius: 6px;
+
+      position: absolute;
+      z-index: 1;
+
+      margin-left: -42px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #tooltip #tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    #tooltip:hover #tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="logobox"></div>
+      <ul>
+        <li href="" onclick="dashboard()" id="tooltip">
+          <span class="fa fa-creative-commons"></span>
+          <span class="tooltiptext" id="tooltiptext">Dashboard</span>
+        </li>
+
+        <li href="" onclick="domains()" id="tooltip">
+          <span class="fa fa-book"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Add domains</span>
+        </li>
+        <li href="" onclick="quickLinks()" id="tooltip">
+          <span class="fa fa-link"></span>
+          <span class="tooltiptext" id="tooltiptext">Quick links</span>
+        </li>
+        <li href="" onclick="addagent()" id="tooltip">
+          <span class="fa fa-user-o"></span>
+          <span class="tooltiptext" id="tooltiptext">Add Agents</span>
+        </li>
+        <li href="" onclick="reporting()" id="tooltip">
+          <span class="fa fa-bar-chart"></span>
+          <span class="tooltiptext" id="tooltiptext">Reporting</span>
+        </li>
+        <li href="" onclick="websitelink()" id="tooltip">
+          <span class="fa fa-globe"></span>
+          <span class="tooltiptext" id="tooltiptext">website link</span>
+        </li>
+        <li href="" onclick="faq()" id="tooltip">
+          <span class="fa fa-upload"></span>
+          <span class="tooltiptext" id="tooltiptext">Faq upload</span>
+        </li>
+
+       <!--  <li href="" onclick="trainbot()" id="tooltip">
+          <span class="fa fa-cube"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+        </li>
+          <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> 
+        <li href="" onclick="setting()" id="tooltip">
+          <span class="fa fa-cog"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Setting</span>
+        </li>-->
+      </ul>
+    </div>
+    <!-- left-panel -->
+    <div class="right-panel right-bg chat-payment">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading">
+                  <a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a>Chatbot Website Link
+                </h1>
+              </div>
+              <!-- col-md-5 -->
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <!--li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li-->
+				  <li class="trainingbtn">
+						<button>Training</button>
+					</li>
+                  <!--li><span class="fa fa-bell-o"></span></li-->
+                  <li class="profile">
+                    <span class="profile-symble"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p id="username"><span>Active</span></p>
+                        </a>
+                      </li>
+                      <!--li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li-->
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- right-header -->
+      <div class="dashboard-container">
+        <h1>Chatbot Link</h1>
+        <div class="newform">
+          <form>
+            <ul class="newfullfrmbx">
+              <li>
+                <label>Domain</label>
+                <select name="domain" id="domain"></select>
+              </li>
+              <li>
+                <label>Website Name</label>
+                <input type="text" name="" id="domainname" placeholder="www.example.com" />
+              </li>
+            </ul>
+            <div class="text-center form-bottom">
+              <input type="button" class="green" value="submit" onclick="submitdata()" />
+              <!-- <input type="reset" class="red" /> -->
+              <!--input type="button" class="green" value="Train Bot" onclick="trainintent()" /-->
+            </div>
+          </form>
+          <br />
+          <div id="hidediv">
+            <!-- <label>Domain Name : </label>
+              <input
+                type="text"
+                id="domain_passed"
+                value=""
+                style="color: green"
+              /> -->
+            <p id="domain_passed"></p>
+            <div id="train_bot_domain"></div>
+
+            <p>
+              <b>Select a domain to train a bot, in that particular domain.</b>
+              <br>
+              <b>Note * Due to security! You get script in Pop-up so please
+                allow your browser for Pop-up</b>
+            </p>
+
+            <!--	<div class="div2" id="div2"></div> -->
+            <!-- <a href="#" onclick="trainintent()" class="create-btn"><i class="fa fa-plus" aria-hidden="true"></i>Train Bot</a> -->
+          </div>
+        </div>
+      </div>
+      <!-- dashboard-container -->
+    </div>
+    <!-- right-panel -->
+  </div>
+  <!-- main-container -->
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      $.ajax({
+        type: "GET",
+        url: "https://www.cybot.co/domain",
+        dataType: "json",
+        async: false,
+        processData: false,
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          // console.log("Response");
+          console.log(data);
+          var client =
+            "<option value='' selected disabled hidden>Select Domain</option>";
+          for (var i = 0; i < data.length; i++) {
+            // console.log(data[i].domain_name + "_" + data[i].token);
+            client +=
+              "<option value='" +
+              data[i].domain +
+              "'>" +
+              data[i].domain +
+              "</option>";
+          }
+          document.getElementById("domain").innerHTML = client;
+        },
+        error: function (data) {
+          alert("Session Expire");
+          window.localStorage.removeItem("test");
+          window.open("index.html", "_self");
+        },
+      });
+    });
+
+    function submitdata() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+
+      var domainurl =
+        "https://" +
+        document
+          .getElementById("domainname")
+          .value.replace(/(^\w+:|^)\/\//, "");
+          
+
+      // var domain_token = document.getElementById("domain").value;
+      // alert(domain_token)
+      // var domain = domain_token.split("_")[0];
+      var domain = document.getElementById("domain").value;
+      var form = new FormData();
+      form.append("domain", domainurl);
+      form.append("domain_name", domain);
+
+      // document.getElementById("domain").value =domainname;
+      localStorage["websitetoken"] = "";
+      $.ajax({
+        type: "post",
+        enctype: "multipart/form-data",
+        url: "https://www.cybot.co/domaintokens",
+        data: form,
+        dataType: "json",
+        async: false,
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+          //	alert("Succesfully Added");
+          //window.location='intent.html?authT='+authT;
+          //alert(data.domain);
+          localStorage["websitetoken"] = data.token;
+          document.getElementById("domain_passed").value = "Domain Name: " + data.domain;
+          printDiv(data.token);
+          // var buffer =
+          //   "<a href='#' onclick='trainintent()' class='create-btn'><i class='fa fa-plus' aria-hidden='true'></i>Train Bot</a>";
+          // document.getElementById("train_bot_domain").innerHTML = buffer;
+        },
+        error: function (data) {
+          alert("Not Added ! use http://example.com or example.com");
+          //	window.localStorage.removeItem('test');
+          //	window.open('index.html',"_self");
+        },
+      });
+    }
+
+    function printDiv(token) {
+      const uri = '<script data-id="chatbox">';
+      const encoded = encodeURIComponent(uri);
+      var val1 = "&lt;script data-id='chatbox' &gt;";
+      var val2 = "&lt;/script&gt;";
+      var a = window.open("", "", "height=500, width=500");
+      a.document.write("<html><body>");
+
+      a.document.write("Copy Script Paste In your website !" + "<br><br>");
+      a.document.write(val1 + "<br>");
+      a.document.write("var _chatbot = {}" + "<br>");
+      a.document.write('_chatbot.key = "' + token + '"' + "<br>");
+      a.document.write(
+        'window.addEventListener("load", (event) => {' + "<br>"
+      );
+      a.document.write(' c = document.createElement("script");' + "<br>");
+      a.document.write(
+        's = document.getElementsByTagName("script")[0];' + "<br>"
+      );
+      a.document.write("b = document.body;" + "<br>");
+      a.document.write(
+        ' c.type = "text/javascript"; c.charset = "utf-8"; c.async = true;' +
+        "<br>"
+      );
+      a.document.write(
+        'c.src = "https://www.cybot.co/static/chatbox/static/loader.js"; s.parentNode.insertBefore(c, s);});' +
+        "<br>"
+      );
+      a.document.write(val2);
+      //   a.document.write('</''script>');
+      //   a.document.write(divContents);
+      a.document.write("</body></html>");
+      a.document.close();
+      //  a.print();
+    }
+    function trainintent() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get('authT');
+
+      console.log("Auth : " + authT);
+      var domain = document.getElementById("domain").value;
+      var token1 = '';
+      console.log(domain);
+
+      $.ajax({
+        type: "GET",
+        url: "https://www.cybot.co/domaintokens",
+        dataType: "json",
+        async: false,
+        processData: false,
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          // console.log("Response");
+          console.log(data);
+          for (var i = 0; i < data.length; i++) {
+            // console.log(data[i].domain_name + "_" + data[i].token);
+            if (data[i].domain_name == domain) {
+              console.log(data[i].token);
+              token1 = data[i].token;
+            }
+          }
+        },
+        error: function (data) {
+          alert("Session Expire");
+          window.localStorage.removeItem("test");
+          window.open("index.html", "_self");
+        },
+      });
+
+      if (token1 === '') {
+        alert("No Token generated for the given domain.")
+      } else {
+
+        console.log(token1)
+
+        // var form = new FormData();
+        // form.append("token", token);
+        // alert(token1)
+        var Data = {
+          token: token1
+        };
+
+        alert("Please wait It will take atleast 10 min to Train your  bot");
+
+        $.ajax({
+          "url": "https://www.cybot.co/intenttrain?token=" + encodeURIComponent(token1),
+          "method": "GET",
+          "timeout": 0,
+          async: false,
+          "headers": {
+            "Authorization": "Token " + authT + "",
+            "Content-Type": "application/json",
+          },
+          success: function (res) {
+            alert(JSON.stringify(res));
+          },
+          error: function (res) {
+            //window.localStorage.removeItem('test');
+            //	window.open('index.html',"_self");
+            alert("Training Failed, error occurred.");
+            alert(JSON.stringify(res));
+          }
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>
+
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->

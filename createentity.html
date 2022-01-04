@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/leftheadernav.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+  <title>Creating New Entity</title>
+
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      $.ajax({
+        type: "GET",
+        url: "https://www.cybot.co/intent",
+        dataType: "json",
+        processData: false,
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          console.log("Response");
+          console.log(data);
+          var client =
+            "<option value='' selected disabled hidden>Select intent</option>";
+          for (var i = 0; i < data.length; i++) {
+            client +=
+              "<option value='" +
+              data[i].intent + ";" + data[i].id +
+              "'>" +
+              data[i].intent +
+              "</option>";
+          }
+          document.getElementById("intent").innerHTML = client;
+        },
+        error: function (data) {
+          alert("Session Expire");
+          window.localStorage.removeItem("test");
+          window.open("index.html", "_self");
+        },
+      });
+    });
+  </script>
+  <style>
+    #tooltip {
+      position: relative;
+
+      border-bottom: 1px dotted black;
+    }
+
+    #tooltip #tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #f5cdcf;
+      color: #130f0f;
+      text-align: center;
+      border-radius: 6px;
+
+      position: absolute;
+      z-index: 1;
+
+      margin-left: -42px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #tooltip #tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    #tooltip:hover #tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #tooltipintent {
+      position: relative;
+
+      border-bottom: 1px dotted black;
+    }
+
+    #tooltipintent #tooltiptextintent {
+      visibility: hidden;
+      width: 342px;
+      background-color: #f5cdcf;
+      color: #130f0f;
+      text-align: center;
+      border-radius: 6px;
+
+      position: absolute;
+      z-index: 1;
+
+      margin-left: 38px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #tooltipintent #tooltiptextintent::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    #tooltipintent:hover #tooltiptextintent {
+      visibility: visible;
+      opacity: 1;
+    }
+
+
+
+    #myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="logobox"></div>
+      <ul>
+        <li href="" onclick="dashboard()" id="tooltip">
+          <span class="fa fa-creative-commons"></span>
+          <span class="tooltiptext" id="tooltiptext">Dashboard</span>
+        </li>
+
+        <li href="" onclick="domains()" id="tooltip">
+          <span class="fa fa-book"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Add domains</span>
+        </li>
+        <li href="" onclick="quickLinks()" id="tooltip">
+          <span class="fa fa-link"></span>
+          <span class="tooltiptext" id="tooltiptext">Quick links</span>
+        </li>
+        <li href="" onclick="addagent()" id="tooltip">
+          <span class="fa fa-user-o"></span>
+          <span class="tooltiptext" id="tooltiptext">Add Agents</span>
+        </li>
+        <li href="" onclick="reporting()" id="tooltip">
+          <span class="fa fa-bar-chart"></span>
+          <span class="tooltiptext" id="tooltiptext">Reporting</span>
+        </li>
+        <li href="" onclick="websitelink()" id="tooltip">
+          <span class="fa fa-globe"></span>
+          <span class="tooltiptext" id="tooltiptext">website link</span>
+        </li>
+        <li href="" onclick="faq()" id="tooltip">
+          <span class="fa fa-upload"></span>
+          <span class="tooltiptext" id="tooltiptext">Faq upload</span>
+        </li>
+
+        <!--  <li href="" onclick="trainbot()" id="tooltip">
+          <span class="fa fa-cube"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+        </li>
+         <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> 
+        <li href="" onclick="setting()" id="tooltip">
+          <span class="fa fa-cog"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Setting</span>
+        </li>-->
+      </ul>
+    </div>
+    <!-- left-panel -->
+    <div class="right-panel right-bg chat-payment">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading">
+                  <a href="#" onclick="entity()" class="backbtn"><span class="fa fa-angle-left"></span></a>View Entity
+                </h1>
+              </div>
+              <!-- col-md-5 -->
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <!--li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li>
+                  <li><span class="fa fa-bell-o"></span></li-->
+				  <li class="trainingbtn">
+						<button>Training</button>
+					</li>
+                  <li class="profile">
+                    <span class="profile-symble"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p id="username"><span>Active</span></p>
+                        </a>
+                      </li>
+                      <!--li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li-->
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- right-header -->
+      <div class="dashboard-container">
+        <div class="flex-row">
+          <div class="left-content">
+        <h1>Creating New Entity</h1>
+        <p>Entities are knowledge repositories used by the bot to provide personalized and accurate responses</p>
+        <div class="newform">
+          <form>
+            <ul class="newfullfrmbx">
+              <li>
+                <label>Entity Name </label>
+                <i class="fa fa-info-circle" aria-hidden="true" id="tooltipintent"><span class="tooltiptextintent" id="tooltiptextintent">
+                  An entity modifies an intent. For example, if a user types “show me yesterday’s financial news”, the entities are “yesterday” and “financial”.</span></i>
+                <input type="text" name="" placeholder="cloud" id="entityname" />
+              </li>
+              <li>
+                <label>Entity Words - separated by ; (semi-colon)</label>
+                  <i class="fa fa-info-circle" aria-hidden="true" id="tooltipintent"><span class="tooltiptextintent" id="tooltiptextintent">Entities are given a name, such as “dateTime” and “newsType”. Entities are sometimes referred to as slots.
+                  </span></i>
+                <!-- <input type="text" name="" placeholder="price;prices;pricing;cost" id="entityword" /> -->
+                <textarea id="entityword" name="w3review" rows="4" cols="50" placeholder="price;prices;pricing;cost" ></textarea>
+              </li>
+              <li>
+                <label>Messages</label>
+                <i class="fa fa-info-circle" aria-hidden="true" id="tooltipintent"><span class="tooltiptextintent" id="tooltiptextintent">show me about yesterday financial news</span></i>
+                <!-- <input type="text" name="" placeholder="cloud * what is?" id="message" /> -->
+                <textarea id="message" name="w3review" rows="4" cols="50" placeholder="cloud * what is?" ></textarea>
+              </li>
+              <li>
+                <label>Response</label>
+                <i class="fa fa-info-circle" aria-hidden="true" id="tooltipintent"><span class="tooltiptextintent" id="tooltiptextintent">1.Bloomberg: Business News App. ...
+                  2.India's real gross domestic product (GDP) at current prices stood at Rs. 195.86 lakh crore</span></i>
+                <input type="text" name="" placeholder="cloud of prices is xxxxx amount." id="response" />
+              </li>
+              <li>
+                <label>Intent</label>
+                <select name="intent" id="intent"></select>
+              </li>
+            </ul>
+            <div class="text-center form-bottom">
+              <input type="button" class="green" value="submit" onclick="submitdata()" />
+              <!-- <input type="reset" class="red" /> -->
+            </div>
+          </form>
+        </div>
+        </div>
+        <div class="chatbotbox">
+          <div class="trainstatus">
+            <img src="images/entity.png" id="myImg">
+            <p><b>Click on Image To see Example</b></p>
+
+        </div>
+        </div>
+        </div>
+      </div>
+      <!-- dashboard-container -->
+    </div>
+    <!-- right-panel -->
+  </div>
+  <!-- main-container -->
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption"></div>
+  </div>
+  
+  <script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById("myImg");
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() { 
+    modal.style.display = "none";
+  }
+  </script>
+  
+</body>
+
+</html>
+
+<script type="text/javascript">
+  function submitdata() {
+    var entity_name = document.getElementById("entityname").value;
+    var entity_word = document.getElementById("entityword").value;
+    var message = document.getElementById("message").value;
+    var response = document.getElementById("response").value;
+    var intent_id = document.getElementById("intent").value;
+
+    var intentarr = intent_id.split(";");
+
+    // var username = "admin1";
+    // var password = "admin@12";
+    var Data = {
+      entity_name: entity_name,
+      entity_word: entity_word,
+      message: message,
+      response: response,
+      intent: intentarr[0],
+      intent_id: intentarr[1]
+    };
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    // alert(JSON.stringify(Data));
+    $.ajax({
+      type: "POST",
+      url: "https://www.cybot.co/entity",
+      data: JSON.stringify(Data),
+      dataType: "json",
+      contentType: "application/json",
+      headers: {
+        Authorization: "Token " + authT + "",
+      },
+      success: function (data) {
+        //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+        alert("Succesfully Added");
+        window.location = "entityview.html?authT=" + authT;
+      },
+      error: function (data) {
+        alert("Not Added Server Api issue ! try again");
+        // window.localStorage.removeItem("test");
+        //  window.open("index.html", "_self");
+      },
+    });
+  }
+</script>

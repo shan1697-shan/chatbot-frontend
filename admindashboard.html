@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/leftheadernav.js"></script>
+
+    <title>Dashboard</title>
+    
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="left-panel">
+        <div class="logobox"></div>
+        <ul>
+          <li><span class="fa fa-creative-commons"></span></li>
+          <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li>
+          <li href="" onclick="domains()"><span class="fa fa-book"></span></li>
+          <li href="" onclick="addhuman()">
+            <span class="fa fa-user-o"></span>
+          </li>
+          <li href="" onclick="reporting()">
+            <span class="fa fa-bar-chart"></span>
+          </li>
+          <li><span class="fa fa-cube"></span></li>
+          <li><span class="fa fa-recycle"></span></li>
+          <li href="" onclick="setting()"><span class="fa fa-cog"></span></li>
+        </ul>
+      </div>
+      <!-- left-panel -->
+      <div class="right-panel">
+        <div class="right-header">
+          <div class="row">
+            <div class="col-md-12 borderbtm">
+              <div class="row align-items-center">
+                <div class="col-md-5">
+                  <h1 class="mainheading">
+                    <a href="#" class="backbtn"
+                      ><span class="fa fa-angle-left"></span
+                    ></a>
+                    Agents
+                  </h1>
+                </div>
+                <!-- col-md-5 -->
+                <div class="col-md-7 rhead-search">
+                  <ul>
+                    <li class="search">
+                      <button class="fa fa-search"></button>
+                      <input type="text" name="" />
+                    </li>
+                    <li><span class="fa fa-gift"></span></li>
+                    <li><span class="fa fa-bell-o"></span></li>
+                    <li class="profile">
+                      <span class="profile-symble" id="username"></span
+                      ><span class="fa fa-angle-down"></span>
+                      <ul class="profile-dropdown">
+                        <li>
+                          <a href="#"
+                            ><span class="profileimg"
+                              >N<i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <p>Nitish Arya<span>Active</span></p></a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-toggle-on"></span>Set inactive
+                            on IntelliAssign</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-user-o"></span>Profile
+                            Settings</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#" onclick="logout()"
+                            ><span class="fa fa-sign-out"></span> Logout</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <!-- col-md-7 -->
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- right-header -->
+        <div class="tabbox">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#app">APP</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#agents">AGENTS</a>
+            </li>
+          </ul>
+        </div>
+        <!-- tabbox -->
+        <div class="tabcontentbox">
+          <div class="tab-content">
+            <div id="app" class="tab-pane active">
+              <div class="filterbox">
+                <ul>
+                  <li class="filterlist">Filter</li>
+                  <li>User Guide</li>
+                </ul>
+              </div>
+              <div class="tab-iner-contentbox">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="whitbox">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <h3>First Response Time</h3>
+                        </div>
+                        <!-- col-md-8 -->
+                        <div class="col-md-4">
+                          <select>
+                            <option>Median</option>
+                          </select>
+                        </div>
+                        <!-- col-md-4 -->
+                      </div>
+                      <!-- row -->
+                      <div class="present-date">
+                        <ul>
+                          <li>Today</li>
+                          <li>Last Week</li>
+                        </ul>
+                      </div>
+                      <p>Deta</p>
+                    </div>
+                    <!-- whitbox -->
+                  </div>
+                  <!-- col-md-6 -->
+                  <div class="col-md-6">
+                    <div class="whitbox">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <h3>Response Time</h3>
+                        </div>
+                        <!-- col-md-8 -->
+                        <div class="col-md-4">
+                          <select>
+                            <option>Median</option>
+                          </select>
+                        </div>
+                        <!-- col-md-4 -->
+                      </div>
+                      <!-- row -->
+                      <div class="present-date">
+                        <ul>
+                          <li>Today</li>
+                          <li>Last Week</li>
+                        </ul>
+                      </div>
+                      <p>Deta</p>
+                    </div>
+                    <!-- whitbox -->
+                  </div>
+                  <!-- col-md-6 -->
+                  <div class="col-md-6">
+                    <div class="whitbox">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <h3>Response Time</h3>
+                        </div>
+                        <!-- col-md-8 -->
+                        <div class="col-md-4">
+                          <select>
+                            <option>Median</option>
+                          </select>
+                        </div>
+                        <!-- col-md-4 -->
+                      </div>
+                      <!-- row -->
+                      <div class="present-date">
+                        <ul>
+                          <li>Today</li>
+                          <li>Last Week</li>
+                        </ul>
+                      </div>
+                      <p>Deta</p>
+                    </div>
+                    <!-- whitbox -->
+                  </div>
+                  <!-- col-md-6 -->
+                  <div class="col-md-6">
+                    <div class="whitbox">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <h3>Response Time</h3>
+                        </div>
+                        <!-- col-md-8 -->
+                        <div class="col-md-4">
+                          <select>
+                            <option>Median</option>
+                          </select>
+                        </div>
+                        <!-- col-md-4 -->
+                      </div>
+                      <!-- row -->
+                      <div class="present-date">
+                        <ul>
+                          <li>Today</li>
+                          <li>Last Week</li>
+                        </ul>
+                      </div>
+                      <p>Deta</p>
+                    </div>
+                    <!-- whitbox -->
+                  </div>
+                  <!-- col-md-6 -->
+                  <div class="col-md-4 customer-sat">
+                    <div class="whitbox">
+                      <h2>Customer Satisfaction</h2>
+                      <p>
+                        Average rating based on all satisfactory interactions
+                        today
+                      </p>
+                      <p class="star">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </p>
+                      <p>
+                        Satisfactory interactions vs Unsatisfactory interactions
+                      </p>
+                      <p class="cust-sat-yes">
+                        <label>Yes</label><span></span>
+                      </p>
+                      <p class="cust-sat-no"><label>No</label><span></span></p>
+                    </div>
+                    <!-- whitbox -->
+                  </div>
+                  <!-- col-md-4 -->
+                  <div class="col-md-8 graph">
+                    <div class="whitbox">
+                      <h2>Incoming Conversations</h2>
+                      <p>Map</p>
+                    </div>
+                    <!-- whitbox -->
+                  </div>
+                  <!-- col-md-8 -->
+                </div>
+                <!-- row -->
+              </div>
+              <!-- tab-iner-contentbox -->
+            </div>
+            <!-- tab-pane -->
+            <div id="agents" class="tab-pane fade">
+              <br />
+              <div class="tab-iner-contentbox">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="whitbox">
+                      <h3>Agents</h3>
+                      <ul>
+                        <li class="border-right">
+                          <p><strong>0</strong><br />Online</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Active on IntelliAssign</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- col-md-4 -->
+                  <div class="col-md-4">
+                    <div class="whitbox">
+                      <h3>Team Inbox</h3>
+                      <ul class="threebox-list">
+                        <li class="border-right">
+                          <p><strong>1</strong><br />Unassigned For</p>
+                          <select>
+                            <option>2 Mins</option>
+                          </select>
+                        </li>
+                        <li>
+                          <p>
+                            <strong>0</strong><br />Assigned & Not replied in
+                          </p>
+                          <select>
+                            <option>2 Mins</option>
+                          </select>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Assigned</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- col-md-4 -->
+                  <div class="col-md-4">
+                    <div class="whitbox">
+                      <h3>Speed of Response</h3>
+                      <ul>
+                        <li class="border-right">
+                          <p><strong>0</strong><br />First Response</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Response Time</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Resolution Time</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Wait Time</p>
+                        </li>
+                      </ul>
+                      <div class="shomebox">
+                        <p>
+                          <span>Show me for the</span>
+                          <select>
+                            <option>Current Day</option>
+                          </select>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- col-md-4 -->
+                  <div class="col-md-4">
+                    <div class="whitbox">
+                      <h3>Agents</h3>
+                      <ul>
+                        <li class="border-right">
+                          <p><strong>0</strong><br />Online</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Active on IntelliAssign</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- col-md-4 -->
+                  <div class="col-md-4">
+                    <div class="whitbox">
+                      <h3>Agents</h3>
+                      <ul>
+                        <li class="border-right">
+                          <p><strong>0</strong><br />Online</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Active on IntelliAssign</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- col-md-4 -->
+                  <div class="col-md-4">
+                    <div class="whitbox">
+                      <h3>Agents</h3>
+                      <ul>
+                        <li class="border-right">
+                          <p><strong>0</strong><br />Online</p>
+                        </li>
+                        <li>
+                          <p><strong>0</strong><br />Active on IntelliAssign</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- col-md-4 -->
+                </div>
+                <!-- row -->
+              </div>
+              <!-- tab-iner-contentbox -->
+            </div>
+            <!-- tab-pane -->
+          </div>
+          <!-- tab-content -->
+        </div>
+        <!-- tabcontentbox -->
+      </div>
+      <!-- right-panel -->
+    </div>
+    <!-- main-container -->
+  </body>
+</html>
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->
+ 

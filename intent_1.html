@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>Intents</title>
+    <script type="text/javascript">
+      function logout() {
+        window.location = "index.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="left-panel">
+        <div class="logobox"></div>
+        <ul>
+          <li><span class="fa fa-creative-commons"></span></li>
+          <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li>
+          <li><span class="fa fa-book"></span></li>
+          <li><span class="fa fa-user-o"></span></li>
+          <li><span class="fa fa-bar-chart"></span></li>
+          <li><span class="fa fa-cube"></span></li>
+          <li><span class="fa fa-recycle"></span></li>
+          <li><span class="fa fa-cog"></span></li>
+        </ul>
+      </div>
+      <!-- left-panel -->
+      <div class="right-panel right-bg chat-payment">
+        <div class="dashboard-container">
+          <div class="flex-row">
+            <div class="left-content">
+              <div class="breadcrumb">
+                <ul>
+                  <li>Intents</li>
+                </ul>
+              </div>
+              <!-- breadcrumb -->
+              <h1>Welcome</h1>
+              <p>
+                Chatbot is a platform that let you fulfill your needs with a
+                conversational interface.
+              </p>
+            </div>
+            <!-- left-content -->
+            <div class="chatbotbox">
+              <div class="trainstatus">
+                <ul>
+                  <li>
+                    <p>Status Ready<br />Train 6 days ago</p>
+                  </li>
+                  <li><span>Train</span></li>
+                </ul>
+              </div>
+              <div class="chatbox-content"></div>
+              <div class="chatbox-btn">
+                <input type="text" name="" placeholder="Text Here" />
+                <i class="fa fa-microphone" aria-hidden="true"></i>
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- dashboard-container -->
+      </div>
+      <!-- right-panel -->
+    </div>
+    <!-- main-container -->
+  </body>
+</html>
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->

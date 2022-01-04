@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <title>Billing Setting</title>
+    <script type="text/javascript">
+      function logout() {
+        window.location = "index.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="right-panel">
+        <div class="right-header">
+          <div class="row">
+            <div class="col-md-12 borderbtm">
+              <div class="row align-items-center">
+                <div class="col-md-5">
+                  <h1 class="mainheading">Billing</h1>
+                </div>
+                <!-- col-md-5 -->
+                <div class="col-md-7 rhead-search">
+                  <ul>
+                    <li class="search">
+                      <button class="fa fa-search"></button>
+                      <input type="text" name="" />
+                    </li>
+                    <li>Cyfuture</li>
+                    <li><a class="intergratebtn">Intergrate Now</a></li>
+                  </ul>
+                </div>
+                <!-- col-md-7 -->
+              </div>
+            </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- right-header -->
+        <div class="billing-main-box">
+          <div class="bilingbox">
+            <div class="alerbox">
+              <div class="alertbg">
+                <h2>16 days of trial left</h2>
+                <p>
+                  You will have to choose a plan at the end of the trial period
+                  to continue If you'd like to end your trial, kindly add a
+                  valid credit card and try again <a href="#">add card</a>
+                </p>
+                <p>
+                  <a href="#" onclick="sub()" class="end-trail"
+                    >Start With Free</a
+                  >
+                </p>
+              </div>
+              <!-- alertbg -->
+              <div class="alerttopbg">
+                <p>
+                  We have updated the billing and downgrading policy.
+                  <a href="">Know more</a>
+                </p>
+              </div>
+              <!-- alerttopbg -->
+            </div>
+            <!-- alerbox -->
+            <div class="alert-whtbox">
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li>Estate</li>
+                  </ul>
+                </div>
+                <!-- col-md-6 -->
+                <div class="col-md-6 editplan">
+                  <ul>
+                    <li>
+                      <select>
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Annualy</option>
+                      </select>
+                    </li>
+                  </ul>
+                </div>
+                <!-- col-md-6 -->
+              </div>
+              <!-- row -->
+              <div class="row">
+                <div class="col-md-12">
+                  <ul>
+                    <li>
+                      <p>Estimated carge for next</p>
+                      <select>
+                        <option>Rs 1000</option>
+                      </select>
+                    </li>
+                    <li>
+                      <p>Number of days<span class="sbcontents"></span></p>
+                      <select>
+                        <option>15 days</option>
+                        <option>30 days</option>
+                        <option>60 days</option>
+                      </select>
+                    </li>
+                    <li class="total-pay">
+                      <p>You Pay</p>
+                      <span>Rs 1000</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- row -->
+              <p>
+                <a href="#" onclick="sub()" class="end-trail"
+                  >End Free and Pay</a
+                >
+              </p>
+            </div>
+          </div>
+          <!-- bilingbox -->
+        </div>
+        <!-- billing-main-box -->
+      </div>
+      <!-- right-panel -->
+    </div>
+    <!-- main-container -->
+    <script>
+      function sub() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+
+        var user_id = localStorage["username"];
+
+        var Data = {
+          subscription_name: "Starter",
+          user_id: user_id,
+          duration: "15",
+        };
+        $.ajax({
+          type: "Post",
+          url: "https://www.cybot.co/api/subscription",
+          data: JSON.stringify(Data),
+          dataType: "json",
+          contentType: "application/json",
+		   headers: {
+            Authorization: "Token " + authT + "",
+          },
+          success: function (data) {
+            //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+
+            window.location = "dashboard.html?authT=" + authT;
+          },
+          error: function (data) {
+            alert("Subscription not done ! please login again");
+            window.location = "login_1.html";
+            //	alert('username or password is wrong');
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->

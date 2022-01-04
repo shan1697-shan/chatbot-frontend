@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	  
+     <script   src="http://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" ></script>
+	
+    <title>Reporting</title>
+	
+	<script type="text/javascript">
+	
+		 $(document).ready(function () {
+        if (localStorage["adminbot"] == "valid") {
+          var username = localStorage["username"];
+          document.getElementById("username").innerHTML = username;
+          //console.log(username);
+        } else {
+     //     window.open("index.html", "_self");
+        }
+      });
+		 function reporting(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='reporting.html?authT='+authT;
+	
+	}
+	
+	function domains(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='domains.html?authT='+authT;
+	
+	}
+	
+	function setting(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='gobalsetting.html?authT='+authT;
+	
+	}
+	function addhuman(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='addhumanagent.html?authT='+authT;
+	
+	}
+		function dashboard(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='dashboard.html?authT='+authT;
+	
+	}
+	function faq(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='faq.html?authT='+authT;
+	
+	}
+	function trainbot(){
+		   const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const authT = urlParams.get('authT');
+		 window.location='trainbycsv.html?authT='+authT;
+	
+	}
+	
+	function addagent() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        window.location = "allagent.html?authT=" + authT;
+      }
+	  
+	   function websitelink() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        window.location = "websitelink.html?authT=" + authT;
+      }
+	
+	function quickLinks() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        window.location = "createQuicklinks.html?authT=" + authT;
+      }
+     function logout() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        $.ajax({
+          type: "Get",
+          url: "https://www.cybot.co/api/logout",
+          headers: {
+            Authorization: "Token " + authT + "",
+          },
+          success: function (data) {
+            window.location = "index.html";
+          },
+          error: function (data) {
+            window.location = "index.html";
+          },
+        });
+      }
+    </script>
+	<style>
+	#tooltip {
+  position: relative;
+ 
+  border-bottom: 1px dotted black;
+}
+
+#tooltip #tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #f5cdcf;
+  color: #130f0f;
+  text-align: center;
+  border-radius: 6px;
+  
+  position: absolute;
+  z-index: 1;
+ 
+  margin-left: -42px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#tooltip #tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+#tooltip:hover #tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+	
+	
+	</style>
+</head>
+<body">
+    <div class="main-container">
+         <div class="left-panel">
+             <div class="logobox"></div>
+        <ul>
+          <li href="" onclick="dashboard()" id ="tooltip">
+            <span class="fa fa-creative-commons" ></span>
+			<span class="tooltiptext" id="tooltiptext">Dashboard</span>
+          </li>
+         
+          <li href="" onclick="domains()" id ="tooltip"><span class="fa fa-book"></span>
+		  
+		  <span class="tooltiptext" id="tooltiptext">Add domains</span>
+		  </li>
+		   <li href="" onclick="quickLinks()" id ="tooltip"><span class="fa fa-link"></span>
+		   <span class="tooltiptext" id="tooltiptext">Quick links</span>
+		   </li>
+          <li href="" onclick="addagent()" id ="tooltip">
+            <span class="fa fa-user-o"></span>
+			<span class="tooltiptext" id="tooltiptext">Add Agents</span>
+          </li>
+          <li href="" onclick="reporting()" id ="tooltip">
+            <span class="fa fa-bar-chart"></span>
+			<span class="tooltiptext" id="tooltiptext">Reporting</span>
+          </li>    
+		  <li href="" onclick="websitelink()" id ="tooltip"><span class="fa fa-globe"></span>
+		  <span class="tooltiptext" id="tooltiptext">website link</span>
+		  </li>
+          <li href="" onclick="faq()" id ="tooltip"><span class="fa fa-upload"></span>
+		  <span class="tooltiptext" id="tooltiptext">Faq upload</span>
+		  
+		  </li>
+		   
+		   <!-- <li href="" onclick="trainbot()" id ="tooltip"><span class="fa fa-cube"></span>
+		   
+		   <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+		   
+		   </li>
+		  <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> 
+          <li href="" onclick="setting()" id ="tooltip"><span class="fa fa-cog"></span>
+		  
+		   <span class="tooltiptext" id="tooltiptext">Setting</span>
+		  </li>-->
+        </ul>
+         </div><!-- left-panel -->
+         <div class="right-panel right-bg chat-payment">
+		 <div class="right-header">
+             <div class="row">
+                 <div class="col-md-12 borderbtm">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <h1 class="mainheading"><a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a>Reporting</h1>
+                        </div><!-- col-md-5 -->
+                        <div class="col-md-7 rhead-search">
+                            <ul class="profile-dropdown">
+                        <li>
+                          <a href="#"
+                            ><span class="profileimg"
+                              >N<i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <p id="username"><span>Active</span></p></a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-toggle-on"></span>Set inactive
+                            on IntelliAssign</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-user-o"></span>Profile
+                            Settings</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#" onclick="logout()"
+                            ><span class="fa fa-sign-out"></span> Logout</a
+                          >
+                        </li>
+                      </ul>
+                        </div><!-- col-md-7 -->
+                    </div>
+                 </div>
+             </div><!-- row -->
+            </div><!-- right-header -->
+            <div class="dashboard-container">
+               
+                <h1>Reporting</h1>                
+                <div class="newform">
+				<ul class="newfullfrmbx">
+				<li class="datelist">
+                            <label>From Date</label>
+                            <input type="Date" name="" id="fromdata">
+							</li>
+							<li class="datelist">
+							<label>To Date</label>
+                            <input type="Date" name="" data-date-format="YYYY MMM DD" id="todate">
+                        </li>
+                       
+                            <li>
+                                <label>Total User</label>
+                                <input type="text" placeholder="" name="" id="countid">
+                            </li>
+							
+				   </ul>
+				   <div class="responsive-table">
+                      <table id="reportingdata">
+								<thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>datetime</th>
+                                        <th>User id</th>
+                                        <th>Mobile</th>
+                                        <th>Country</th>
+                                        <th>Email</th>
+                                        <th>Chat View</th>
+                                    </tr>
+									</thead>
+                     	             <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+									</tbody>
+                                </table>
+                   </div><!-- responsive-table -->
+				    <div class="text-center form-bottom"><input type="button" class="green"  onclick="getdata();" value="submit"/>
+                </div><!-- newform -->
+            </div><!-- dashboard-container -->
+         </div><!-- right-panel --> 
+    </div><!-- main-container -->
+ 
+ 
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $(".menuicon").click(function () {
+                $(".leftnav").toggle();
+            });
+			
+        });
+		
+	
+		
+		function getdata(){
+		$('#reportingdata').dataTable().fnDestroy();
+		 var fromdata = document.getElementById("fromdata").value;
+      var todate = document.getElementById("todate").value;
+		 
+		  var Data = {"startdate": fromdata , "enddate": todate}
+		  const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const authT = urlParams.get('authT');
+		
+		          $.ajax({
+							type: 'post',
+							url:'https://www.cybot.co/conversation',
+						    data: Data,
+		                    dataType:'json',
+							"headers": {
+					       "Authorization": "Token "+authT+""
+				             },
+							success: function(data) {
+                //console.log("userid = "+data.data[0].count);
+              
+							var count =data.data[0].count;
+              
+							document.getElementById("countid").value=count;
+							var KeyValueData = tableData(data);
+                          //console.log(data);
+                           var drawdata = {"data": KeyValueData};
+						  
+						    table = $('#reportingdata').DataTable({
+
+                                  processing: true,
+
+                                  autoWidth: false,
+
+                                  data: drawdata.data,
+
+                                  scrollY: 380,
+
+                                  scrollX: true,
+
+                                  paging: false,
+
+                                  ordering: false,
+								  columns:[
+                                             { "data": "id"},
+                                             { "data": "datetime"},
+                                             { "data": "user_id"},
+                                             { "data": "mobile"},
+                                             { "data": "country"},
+                                             { "data": "email"},
+											 {
+																
+										render: function (data, type, row) {
+										var ID_Val =row.id;
+										var date = row.datetime;
+										var email =row.user_id;
+										var auth = authT;
+										
+									return '<a id="released_po_status_'+ID_Val+'"  href="viewchat.html?date='+date+'&&email='+email+'&&authT='+auth+'" >Click To View</a>';
+																					}
+																				}
+
+                                         ], order: [[ 0, "desc" ]]
+
+                             });
+						   
+
+							},
+							error: function(data){
+							alert('Session Expire ! please try agin');
+						//		window.localStorage.removeItem('test');
+						//		window.open('index.html',"_self");
+							}
+						});
+		
+		}
+		
+		
+	function tableData(result){
+     
+     var datalist =  new Array();
+	   var id = 1;
+     for (var i = 0; i < result.data.length; i++)
+     { 
+	    //console.log("user_name" + result.data[i].username);
+		  var datetime = result.data[i].date;
+      var user_id = result.data[i].user_id;
+      var user_name = result.data[i].username;
+			var mobile = result.data[i].mobile;
+      var country = result.data[i].country;
+      var email = result.data[i].email;
+			var count = result.data[i].count;
+      datalist[i] = {"id":id ,"datetime":datetime,"user_id":user_id,"mobile":mobile,"country":country,"email":email,"count":count};
+      id++;
+     }
+       return datalist;
+}
+		
+		
+    </script>
+</body>
+</html>
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->

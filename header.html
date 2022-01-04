@@ -1,0 +1,63 @@
+<script type="text/javascript">
+  function reporting() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    window.location = "reporting.html?authT=" + authT;
+  }
+
+  function setting() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    window.location = "gobalsetting.html?authT=" + authT;
+  }
+
+  function domains() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    window.location = "domains.html?authT=" + authT;
+  }
+
+  function entity() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    window.location = "entityview.html?authT=" + authT;
+  }
+
+  function intent() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    window.location = "intent.html?authT=" + authT;
+  }
+
+  function addhuman() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+    window.location = "addhumanagent.html?authT=" + authT;
+  }
+
+  function logout() {
+    window.location = "index.html";
+  }
+</script>
+
+<div class="left-panel">
+  <div class="logobox"></div>
+  <ul>
+    <li><span class="fa fa-creative-commons"></span></li>
+    <li><span class="fa fa-bullhorn"></span></li>
+    <li><span class="fa fa-bookmark-o"></span></li>
+    <li href="" onclick="domains()"><span class="fa fa-book"></span></li>
+    <li href="" onclick="addhuman()"><span class="fa fa-user-o"></span></li>
+    <li href="" onclick="reporting()"><span class="fa fa-bar-chart"></span></li>
+    <li><span class="fa fa-cube"></span></li>
+    <li><span class="fa fa-recycle"></span></li>
+    <li href="" onclick="setting()"><span class="fa fa-cog"></span></li>
+  </ul>
+</div>
+<!-- left-panel -->

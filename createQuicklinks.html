@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/leftheadernav.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".menuicon").click(function () {
+        $(".leftnav").toggle();
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $(".menuicon").click(function () {
+        $(".leftnav").toggle();
+      });
+    });
+
+
+    $(document).ready(function () {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      // var username = "admin1";
+      // var password = "admin@12";
+      $.ajax({
+        type: "GET",
+        url: "https://www.cybot.co/domain",
+        dataType: "json",
+        processData: false,
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          var buffer =
+            "<option value='' selected disabled hidden>Select Domains</option>";
+          for (var i = 0; i < data.length; i++) {
+            buffer +=
+              "<option value='" + data[i].domain + "'>" + data[i].domain + "</option>";
+          }
+          document.getElementById("domain").innerHTML = buffer;
+        },
+        error: function (data) {
+          // window.localStorage.removeItem("test");
+          // window.open("index.html", "_self");
+          dashboard();
+        },
+      });
+    });
+
+    function viewQuickLinks(domainSelected) {
+      // console.log(domainSelected);
+      var domain = domainSelected.value;
+      // console.log(domain);
+      // alert(domainSelected.value);
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      var settings = {
+        "url": "https://cybot.co/quick?domain=" + domain,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Authorization": "Token " + authT
+        },
+      };
+
+      $.ajax(settings).done(function (response) {
+        // console.log(response);
+        var buffer = "";
+        for (var i = 0; i < response.length; i++) {
+          buffer += "<ul class='list-group'>";
+          // console.log(response[i]);
+          buffer += "<li class='list-group-item active' aria-current='true'>" + response[i].message + "</li>";
+          var quicklinks_array = response[i].quicklinks.split("&#10141;");
+          // console.log(quicklinks_array);
+          quicklinks_array.forEach(function (item, index) {
+            buffer += "<li class='list-group-item'>" + item + "</li>";
+          });
+
+          // console.log(Object.keys(response[i]));
+          buffer += "</ul>";
+        }
+        document.getElementById("quicklinks-table").innerHTML = buffer;
+      });
+    }
+
+    function tableData(result) {
+      var datalist = new Array();
+      for (var i = 0; i < result.length; i++) {
+        var id = result[i].id;
+        var domains = result[i].domain;
+        var client = result[i].client;
+        datalist[i] = { id: id, domains: domains, client: client };
+      }
+      return datalist;
+    }
+  </script>
+  <style>
+    #tooltip {
+      position: relative;
+
+      border-bottom: 1px dotted black;
+    }
+
+    #tooltip #tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #f5cdcf;
+      color: #130f0f;
+      text-align: center;
+      border-radius: 6px;
+
+      position: absolute;
+      z-index: 1;
+
+      margin-left: -42px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #tooltip #tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    #tooltip:hover #tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+  <title>Add QuickLinks</title>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="logobox"></div>
+      <ul>
+        <li href="" onclick="dashboard()" id="tooltip">
+          <span class="fa fa-creative-commons"></span>
+          <span class="tooltiptext" id="tooltiptext">Dashboard</span>
+        </li>
+
+        <li href="" onclick="domains()" id="tooltip"><span class="fa fa-book"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Add domains</span>
+        </li>
+        <li href="" onclick="quickLinks()" id="tooltip"><span class="fa fa-link"></span>
+          <span class="tooltiptext" id="tooltiptext">Quick links</span>
+        </li>
+        <li href="" onclick="addagent()" id="tooltip">
+          <span class="fa fa-user-o"></span>
+          <span class="tooltiptext" id="tooltiptext">Add Agents</span>
+        </li>
+        <li href="" onclick="reporting()" id="tooltip">
+          <span class="fa fa-bar-chart"></span>
+          <span class="tooltiptext" id="tooltiptext">Reporting</span>
+        </li>
+        <li href="" onclick="websitelink()" id="tooltip"><span class="fa fa-globe"></span>
+          <span class="tooltiptext" id="tooltiptext">website link</span>
+        </li>
+        <li href="" onclick="faq()" id="tooltip"><span class="fa fa-upload"></span>
+          <span class="tooltiptext" id="tooltiptext">Faq upload</span>
+
+        </li>
+
+        <li href="" onclick="trainbot()" id="tooltip"><span class="fa fa-cube"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+
+        </li>
+        <!--   <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> -->
+        <li href="" onclick="setting()" id="tooltip"><span class="fa fa-cog"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Setting</span>
+        </li>
+      </ul>
+    </div>
+    <!-- left-panel -->
+    <div class="right-panel right-bg chat-payment">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading">
+                  <a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a>QuickLinks
+                </h1>
+              </div>
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li>
+                  <li><span class="fa fa-bell-o"></span></li>
+                  <li class="profile">
+                    <span class="profile-symble"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p id="username"><span>Active</span></p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div><!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- right-header -->
+      <div class="dashboard-container">
+        <h1>Add QuickLinks</h1>
+        <div class="newform">
+          <form id="fileupload">
+            <ul class="newfullfrmbx">
+              <li>
+                <label>Select Domain Name</label>
+                <select name="domain" id="domain" onchange="viewQuickLinks(this);"></select>
+              </li>
+              <li>
+                <label>Message</label>
+                <input type="text" id="message" name="message" />
+              </li>
+              <li>
+                <label>QuickLinks - separated by ; (semi-colon)</label>
+                <p>
+                  Example: how are glacier caves formed?;how did apollo creed
+                  die;how a vul works;how much is 1 tablespoon of water;how
+                  much are the harry potter movies worth
+                </p>
+                <input type="text" id="quicklinks" name="quicklinks" />
+              </li>
+            </ul>
+            <div class="text-center form-bottom">
+              <input type="button" class="green" onclick="submitdata();" value="Submit" />
+              <!-- <input type="reset" class="red" /> -->
+            </div>
+          </form>
+        </div>
+        <h2>QuickLinks</h2>
+
+        <div id="quicklinks-table">
+          <ul class="list-group">
+            <li class="list-group-item active" aria-current="true">Message</li>
+            <li class="list-group-item">QuickLinks</li>
+          </ul>
+        </div>
+      </div>
+      <!-- dashboard-container -->
+      <!-- <dib class="dashboard-container">
+          <h1 id="quicklinksheading">QuickLinks</h1> -->
+      <!-- <p id="initial-quick-msg">Select a Domain to see registered QuickLinks</p> -->
+      <!-- </dib>
+      </div> -->
+      <!-- right-panel -->
+    </div>
+    <!-- main-container -->
+    <script type="text/javascript">
+      function submitdata() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        var domain = document.getElementById("domain").value;
+        var message = document.getElementById("message").value;
+        var quicklinks = document.getElementById("quicklinks").value;
+        var quicklinks_array = quicklinks.split(";");
+
+        var formdata = { domain: domain, message: message, quicklinks: quicklinks_array };
+
+        $.ajax({
+          type: "POST",
+          url: "https://www.cybot.co/quick",
+          data: JSON.stringify(formdata),
+          headers: {
+            "Authorization": "Token " + authT + "",
+            "Content-Type": "application/json"
+          },
+          success: function (res) {
+            //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+            alert("Your QuickLinks Uploaded Sucessfully");
+            quickLinks();
+          },
+          error: function (res) {
+            alert("Please enter required fields");
+            quickLinks();
+            //window.localStorage.removeItem('test');
+          },
+        });
+      }
+    </script>
+</body>
+
+</html>

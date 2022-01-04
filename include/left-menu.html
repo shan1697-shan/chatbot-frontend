@@ -1,0 +1,30 @@
+<script>
+	$(document).ready(function () {
+		$('.show-menu').click(function() {
+			$('.left-panel').toggleClass("active");
+			$(this).toggleClass("opened");
+		});
+	});
+  </script>
+    <div class="left-menu">
+		<div class="show-menu"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+		<div class="logobox"></div>
+		<ul>
+			<li>
+			<span class="fa fa-creative-commons"></span>
+			<span class="tooltiptext">Dashboard</span>
+			</li>
+			<li href="" onclick="allteam()" id ="tooltip">
+				<span class="fa fa-user-o"></span>
+				<span class="tooltiptext">Agent online</span>
+			</li>
+			<li href="" onclick="reportagent()">
+				<span class="fa fa-bar-chart"></span>  
+				<span class="tooltiptext">Chart</span>
+			</li>
+			<li href="" onclick="agentChatHostory()" id ="tooltip">
+				<span class="fa fa-user-o"></span>
+				<span class="tooltiptext">Agent chat history</span>
+			</li>        
+		</ul>
+    </div><!-- left-menu -->

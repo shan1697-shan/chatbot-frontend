@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/leftheadernav.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css"> -->
+
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+    />
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <title>Add Human Agent</title>
+    <style>
+      .error{
+          outline: 1px solid red;
+      }    
+  </style>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="left-panel">
+        <div class="logobox"></div>
+         <ul>
+          <li href="" onclick="dashboard()">
+            <span class="fa fa-creative-commons"></span>
+          </li>
+         
+          <li href="" onclick="domains()"><span class="fa fa-book"></span></li>
+		   <li href="" onclick="quickLinks()"><span class="fa fa-link"></span></span></li>
+          <li href="" onclick="addagent()">
+            <span class="fa fa-user-o"></span>
+          </li>
+          <li href="" onclick="reporting()">
+            <span class="fa fa-bar-chart"></span>
+          </li>    
+		  <li href="" onclick="websitelink()" ><span class="fa fa-globe"></span></li>
+          <li href="" onclick="faq()"><span class="fa fa-upload"></span></li>
+		   
+		   <li href="" onclick="trainbot()"><span class="fa fa-cube"></span></li>
+		<!--   <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> -->
+          <li href="" onclick="setting()"><span class="fa fa-cog"></span></li>
+        </ul>
+      </div>
+      <!-- left-panel -->
+      <div class="right-panel right-bg chat-payment">
+        <div class="right-header">
+          <div class="row">
+            <div class="col-md-12 borderbtm">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <h1 class="mainheading"><a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a></h1>
+                        </div><!-- col-md-5 -->
+                        <div class="col-md-7 rhead-search">
+                            <ul>
+                    <li class="search">
+                      <button class="fa fa-search"></button>
+                      <input type="text" name="" />
+                    </li>
+                    <li><span class="fa fa-gift"></span></li>
+                    <li><span class="fa fa-bell-o"></span></li>
+                    <li class="profile">
+                      <span class="profile-symble" ></span
+                      ><span class="fa fa-angle-down"></span>
+                      <ul class="profile-dropdown">
+                        <li>
+                          <a href="#"
+                            ><span class="profileimg"
+                              >N<i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                            <p id="username"><span>Active</span></p></a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-toggle-on"></span>Set inactive
+                            on IntelliAssign</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#"
+                            ><span class="fa fa-user-o"></span>Profile
+                            Settings</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#" onclick="logout()"
+                            ><span class="fa fa-sign-out"></span> Logout</a
+                          >
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                        </div><!-- col-md-7 -->
+                    </div>
+                 </div>
+          </div>
+          <!-- row -->
+        </div>
+        <!-- right-header -->
+        <div class="dashboard-container">
+          <h1>Add Human Agent</h1>
+		   
+          <div class="newform">
+            <form id="humanform">
+              <ul class="newfullfrmbx">
+                <li>
+                  <label>First Name </label>
+                  <input type="text" name="" id="firstname" />
+                </li>
+                <li>
+                  <label>Last Name</label>
+                  <input type="text" name="" id="lastname" />
+                </li>
+                <li>
+                  <label>UserName</label>
+                  <input type="text" name="" id="username1" />
+                </li>
+                <li>
+                  <label>Email</label>
+                  <input type="text" name="" id="email" />
+                </li>
+                <li>
+                  <label>Password</label>
+				  
+                  <input type="text" name="" id="password1" placeholder="Password (*Minm 8 char & alphanumeric)" />
+                </li>
+
+                <li>
+                  <label>Confirm Password</label>
+                  <input type="text" name="" id="password2" placeholder="Password (*Minm 8 char & alphanumeric)"/>
+                </li>
+                <li>
+                  <label>Mobile No.</label>
+                  <input type="text" name="" id="mobileno" />
+                </li>
+              </ul>
+              <div class="text-center form-bottom">
+                <input type="button" class="green" value="submit" onclick="submitdata()" />
+                  <!-- <input type="reset" class="red" /> -->
+              </div>
+            </form>
+			<div
+            align="center"
+            id="msgbox"
+            style="display: block; color: red"
+          ></div>
+          </div>
+        </div>
+        <!-- dashboard-container -->
+      </div>
+      <!-- right-panel -->
+    </div>
+    <!-- main-container -->
+  </body>
+</html>
+
+<script type="text/javascript">
+  function submitdata() {
+
+//  alert("in testing");
+    var firstname = document.getElementById("firstname").value;
+    var lastname = document.getElementById("lastname").value;
+    var username1 = document.getElementById("username1").value;
+    var email = document.getElementById("email").value;
+    var password1 = document.getElementById("password1").value;
+    var password2 = document.getElementById("password2").value;
+    var mobileno = document.getElementById("mobileno").value;
+
+    var x = 0;
+
+    var msg = "";
+
+    if (!firstname) {
+      msg += "First name, "
+      x = 1;
+    }if (!lastname) {
+      msg += "Last name, "
+      x = 1;
+    }if (!username1) {
+      msg += "Username, "
+      x = 1;
+    }if (!password1 || !password2) {
+      msg += "password, "
+      x = 1;
+    }if (!mobileno ) {
+      msg += "mobile no"
+      x = 1;
+    }
+    if  (x == 1)
+      document.getElementById("msgbox").innerHTML = msg + " cannot be empty."
+    
+    if (x == 0) {
+//alert(username1);
+    var Data = {
+      first_name: firstname,
+      last_name: lastname,
+      username: username1,
+      email: email,
+      password1: password1,
+      password2: password2,
+      mobile_no: mobileno,
+    };
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const authT = urlParams.get("authT");
+   //  alert(JSON.stringify(Data));
+    $.ajax({
+      type:"Post",
+      url: "https://www.cybot.co/registration/human/",
+      data: JSON.stringify(Data),
+      dataType: "json",
+      contentType: "application/json",
+	  headers: {
+            Authorization: "Token " + authT + "",
+          },
+      success: function (data) {
+        //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+        alert("Human Agent Succesfully Added");
+        //	window.location='entitiesview.html'
+		 window.location = "allagent.html?authT=" + authT;
+      },
+      error: function (data) {
+      //  alert("Session Expire");
+      //  alert("DATA NOT ADDED ! Some error");
+	  var usernamenot = JSON.stringify(data.responseJSON);
+	  document.getElementById("msgbox").innerHTML = usernamenot;
+      },
+    });
+  }
+}
+</script>

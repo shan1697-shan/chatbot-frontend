@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script src="js/jquery-main.js"></script>
+
+    <title>Register</title>
+	 <script type="text/javascript">
+	$(document).ready(function() { 
+		  $("#showHide").click(function() {//alert("");  
+		    if ($("#password1").attr("type") == "password") {
+		      $("#password1").attr("type", "text");
+		      $("#showHide").html("<img src='images/logo/hide.png' style='width: 20px;'>");
+		    } else {
+		      $("#password1").attr("type", "password");
+		      $("#showHide").html("<img src='images/logo/eye.png' style='width: 20px;'>");
+		    
+		    } 
+		  });
+		});
+	</script> 
+  </head>
+  <body>
+    <div class="main-container align-items-center loginpage">
+      <div class="login-left">
+        <div class="logobox">
+          <img src="images/logo.png" />
+        </div>
+        <p><strong>New Registration</strong></p>
+        <!-- <div class="login-icon">
+           	<img src="images/logo-icon.jpg">
+           </div> -->
+        <!-- login-icon -->
+        <div class="loginbtm-content">
+          <p>Text to be updated</p>
+        </div>
+      </div>
+      <!-- left-panel -->
+      <div class="login-right">
+        <div class="loginbox">
+          <h2>New Registration</h2>
+          <p>New Registration</p>
+          <ul>
+            <li class="namelist">
+              <input
+                type="text"
+                name=""
+                placeholder="First Name"
+                id="firstname"
+              />
+              <input
+                type="text"
+                name=""
+                placeholder="Last Name"
+                id="lastname"
+              />
+            </li>
+            <li>
+              <input
+                type="text"
+                name=""
+                placeholder="User Name"
+                id="username"
+              />
+            </li>
+            <li>
+              <input type="text" name="" placeholder="Email" id="email" />
+            </li>
+            <li>
+              <input
+                type="password"
+                name=""
+                placeholder="Password (*Minm 8 char & alphanumeric)"
+                id="password1"
+              />
+			  <a style="position: absolute !important;top:55%;float: right !important;right: 133px;text-decoration: none;cursor: pointer;color: #a9d198" id="showHide"><img src="images/logo/eye.png" style="width: 20px;"> <span id="eyeOnForgetPassword" toggle="#password-field" class="fa fa-fw field-iconForPassword toggle-password fa-eye-slash"></span></a>
+            </li>
+            <li>
+              <input
+                type="password"
+                name=""
+                placeholder="Confirm Password"
+                id="password2"
+              />
+            </li>
+            <li class="submitlist">
+              <input type="button" value="submit" onclick="submitdata()" />
+            </li>
+            <li class="login-terms">
+              <p><a href="login_1.html">Already have an account?</a></p>
+            </li>
+          </ul>
+          <div
+            align="center"
+            id="msgbox"
+            style="display: block; color: red"
+          ></div>
+        </div>
+        <p class="copywrit">Text to be updated</p>
+      </div>
+      <!-- login-right -->
+    </div>
+    <!-- main-container -->
+    <script type="text/javascript">
+      function submitdata() {
+        var firstname = document.getElementById("firstname").value;
+        var lastname = document.getElementById("lastname").value;
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var password1 = document.getElementById("password1").value;
+        var password2 = document.getElementById("password2").value;
+
+        var Data = {
+          first_name: firstname,
+          last_name: lastname,
+          username: username,
+          email: email,
+          password1: password1,
+          password2: password2,
+        };
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+        // alert(JSON.stringify(Data));
+        $.ajax({
+          type: "post",
+          url: "https://www.cybot.co/registration/company/",
+          data: JSON.stringify(Data),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+            //	alert("Human Agent Succesfully Added");
+            window.location = "login_1.html";
+          },
+          error: function (data) {
+            //alert("Error"+data);
+			var usernamenot = JSON.stringify(data.responseJSON);
+			//alert(usernamenot);
+			if(usernamenot != ""){
+			 document.getElementById("msgbox").innerHTML = usernamenot;
+			 
+			 }
+			else{
+            document.getElementById("msgbox").innerHTML =
+              "Please enter correct value";
+			  }
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

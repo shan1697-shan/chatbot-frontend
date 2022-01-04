@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/leftheadernav.js"></script>
+  <title>Creating New Intent</title>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="logobox"></div>
+      <ul>
+        <li><span class="fa fa-creative-commons"></span></li>
+        <li><span class="fa fa-bullhorn"></span></li>
+        <li><span class="fa fa-bookmark-o"></span></li>
+        <li><span class="fa fa-book"></span></li>
+        <li><span class="fa fa-user-o"></span></li>
+        <li><span class="fa fa-bar-chart"></span></li>
+        <li><span class="fa fa-cube"></span></li>
+        <li><span class="fa fa-recycle"></span></li>
+        <li><span class="fa fa-cog"></span></li>
+      </ul>
+    </div>
+    <!-- left-panel -->
+    <div class="right-panel right-bg chat-payment">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading">
+                  <a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a>Creating New Intent
+                </h1>
+              </div>
+              <!-- col-md-5 -->
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li>
+                  <li><span class="fa fa-bell-o"></span></li>
+                  <li class="profile">
+                    <span class="profile-symble" id="username"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p>Nitish Arya<span>Active</span></p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- right-header -->
+      <div class="dashboard-container">
+        <div class="flex-row">
+          <div class="left-content">
+            <h1>Creating New Intent</h1>
+            <p>
+              Intents are grouped user sayings with a similar purpose. For
+              example a user may say, "I want to order a cheese pizza and that
+              may be labeled with an intent of Order Pizza
+            </p>
+            <div class="newform">
+              <form>
+                <ul class="newfullfrmbx">
+                  <li>
+                    <label>Domain</label>
+                    <select>
+                      <option>Select</option>
+                    </select>
+                  </li>
+                  <li>
+                    <label>Intent Name</label>
+                    <input type="text" />
+                  </li>
+                  <li class="twoboxinput">
+                    <label>User Says</label>
+                    <input type="text" />
+                    <input type="text" />
+                  </li>
+                  <li class="grebox">
+                    <p>Example How's the weather looking for today</p>
+                  </li>
+                </ul>
+                <div class="text-center form-bottom">
+                  <input type="submit" class="green" />
+                </div>
+              </form>
+            </div>
+            <!-- newform -->
+          </div>
+          <!-- left-content -->
+          <div class="chatbotbox">
+            <div class="trainstatus">
+              <ul>
+                <li>
+                  <p>Status Ready<br />Train 6 days ago</p>
+                </li>
+                <li><span>Train</span></li>
+              </ul>
+            </div>
+            <div class="chatbox-content"></div>
+            <div class="chatbox-btn">
+              <input type="text" name="" placeholder="Text Here" />
+              <i class="fa fa-microphone" aria-hidden="true"></i>
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+        <!-- flex-row -->
+      </div>
+      <!-- dashboard-container -->
+    </div>
+    <!-- right-panel -->
+  </div>
+  <!-- main-container -->
+</body>
+
+</html>
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->

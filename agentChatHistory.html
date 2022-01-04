@@ -1,0 +1,1678 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="js/common.js"></script>
+ 
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!DOCTYPE html>
+<html class=''>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet'
+        type='text/css'>
+
+    <!-- <script src="https://use.typekit.net/hoy3lrg.js"></script>
+    <script>try { Typekit.load({ async: true }); } catch (e) { }</script> -->
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+    <link rel='stylesheet prefetch'
+        href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+        
+
+
+    <style class="cp-pen-styles">
+        
+        .checked {
+  color: orange;
+}
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #27ae60;
+            font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+            font-size: 1em;
+            letter-spacing: 0.1px;
+            color: #32465a;
+            text-rendering: optimizeLegibility;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #frame {
+            /* width: 95%; */
+            width: 100%;
+            min-width: 360px;
+            /* max-width: 1000px; */
+            /* height: 92vh; */
+            height: 100vh;
+            min-height: 300px;
+            /* max-height: 720px; */
+            background: #E6EAEA;
+        }
+
+        @media screen and (max-width: 360px) {
+            #frame {
+                width: 100%;
+                height: 100vh;
+            }
+        }
+
+        #frame #sidepanel {
+            float: left;
+            min-width: 280px;
+            max-width: 340px;
+            width: 40%;
+            height: 100%;
+            background: #2c3e50;
+            color: #f5f5f5;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel {
+                width: 58px;
+                min-width: 58px;
+            }
+        }
+
+        #frame #sidepanel #profile {
+            width: 80%;
+            margin: 25px auto;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile {
+                width: 100%;
+                margin: 0 auto;
+                padding: 5px 0 0 0;
+                background: #32465a;
+            }
+        }
+
+        #frame #sidepanel #profile.expanded .wrap {
+            height: 210px;
+            line-height: initial;
+        }
+
+        #frame #sidepanel #profile.expanded .wrap p {
+            margin-top: 20px;
+        }
+
+        #frame #sidepanel #profile.expanded .wrap i.expand-button {
+            -moz-transform: scaleY(-1);
+            -o-transform: scaleY(-1);
+            -webkit-transform: scaleY(-1);
+            transform: scaleY(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+        }
+
+        #frame #sidepanel #profile .wrap {
+            height: 60px;
+            line-height: 60px;
+            overflow: hidden;
+            -moz-transition: 0.3s height ease;
+            -o-transition: 0.3s height ease;
+            -webkit-transition: 0.3s height ease;
+            transition: 0.3s height ease;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap {
+                height: 55px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap img {
+            width: 50px;
+            border-radius: 50%;
+            padding: 3px;
+            border: 2px solid #e74c3c;
+            height: auto;
+            float: left;
+            cursor: pointer;
+            -moz-transition: 0.3s border ease;
+            -o-transition: 0.3s border ease;
+            -webkit-transition: 0.3s border ease;
+            transition: 0.3s border ease;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap img {
+                width: 40px;
+                margin-left: 4px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap img.online {
+            border: 2px solid #2ecc71;
+        }
+
+        #frame #sidepanel #profile .wrap img.away {
+            border: 2px solid #f1c40f;
+        }
+
+        #frame #sidepanel #profile .wrap img.busy {
+            border: 2px solid #e74c3c;
+        }
+
+        #frame #sidepanel #profile .wrap img.offline {
+            border: 2px solid #95a5a6;
+        }
+
+        #frame #sidepanel #profile .wrap p {
+            float: left;
+            margin-left: 15px;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap p {
+                display: none;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap i.expand-button {
+            float: right;
+            margin-top: 23px;
+            font-size: 0.8em;
+            cursor: pointer;
+            color: #435f7a;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap i.expand-button {
+                display: none;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            width: 150px;
+            margin: 70px 0 0 0;
+            border-radius: 6px;
+            z-index: 99;
+            line-height: initial;
+            background: #435f7a;
+            -moz-transition: 0.3s all ease;
+            -o-transition: 0.3s all ease;
+            -webkit-transition: 0.3s all ease;
+            transition: 0.3s all ease;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options {
+                width: 58px;
+                margin-top: 57px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options.active {
+            opacity: 1;
+            visibility: visible;
+            margin: 75px 0 0 0;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options.active {
+                margin-top: 62px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 8px solid #435f7a;
+            margin: -8px 0 0 24px;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options:before {
+                margin-left: 23px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul {
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li {
+            padding: 15px 0 30px 18px;
+            display: block;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options ul li {
+                padding: 15px 0 35px 22px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li:hover {
+            background: #496886;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 5px 0 0 0;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            margin: -3px 0 0 -3px;
+            background: transparent;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+                height: 18px;
+                width: 18px;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li p {
+            padding-left: 12px;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #profile .wrap #status-options ul li p {
+                display: none;
+            }
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {
+            background: #2ecc71;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {
+            border: 1px solid #2ecc71;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {
+            background: #f1c40f;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {
+            border: 1px solid #f1c40f;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {
+            background: #e74c3c;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {
+            border: 1px solid #e74c3c;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {
+            background: #95a5a6;
+        }
+
+        #frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
+            border: 1px solid #95a5a6;
+        }
+
+        #frame #sidepanel #profile .wrap #expanded {
+            padding: 100px 0 0 0;
+            display: block;
+            line-height: initial !important;
+        }
+
+        #frame #sidepanel #profile .wrap #expanded label {
+            float: left;
+            clear: both;
+            margin: 0 8px 5px 0;
+            padding: 5px 0;
+        }
+
+        #frame #sidepanel #profile .wrap #expanded input {
+            border: none;
+            margin-bottom: 6px;
+            background: #32465a;
+            border-radius: 3px;
+            color: #f5f5f5;
+            padding: 7px;
+            width: calc(100% - 43px);
+        }
+
+        #frame #sidepanel #profile .wrap #expanded input:focus {
+            outline: none;
+            background: #435f7a;
+        }
+
+        #frame #sidepanel #search {
+            border-top: 1px solid #32465a;
+            border-bottom: 1px solid #32465a;
+            font-weight: 300;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #search {
+                display: none;
+            }
+        }
+
+        #frame #sidepanel #search label {
+            position: absolute;
+            margin: 10px 0 0 20px;
+        }
+
+        #frame #sidepanel #search input {
+            font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+            padding: 10px 0 10px 46px;
+            /* width: calc(100% - 25px); */
+            width: calc(100%);
+            border: none;
+            background: #32465a;
+            color: #f5f5f5;
+        }
+
+        #frame #sidepanel #search input:focus {
+            outline: none;
+            background: #435f7a;
+        }
+
+        #frame #sidepanel #search input::-webkit-input-placeholder {
+            color: #f5f5f5;
+        }
+
+        #frame #sidepanel #search input::-moz-placeholder {
+            color: #f5f5f5;
+        }
+
+        #frame #sidepanel #search input:-ms-input-placeholder {
+            color: #f5f5f5;
+        }
+
+        #frame #sidepanel #search input:-moz-placeholder {
+            color: #f5f5f5;
+        }
+
+        #frame #sidepanel #contacts {
+            height: calc(100% - 177px);
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #contacts {
+                height: calc(100% - 149px);
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+
+            #frame #sidepanel #contacts::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        #frame #sidepanel #contacts.expanded {
+            height: calc(100% - 334px);
+        }
+
+        #frame #sidepanel #contacts::-webkit-scrollbar {
+            width: 8px;
+            background: #2c3e50;
+        }
+
+        #frame #sidepanel #contacts::-webkit-scrollbar-thumb {
+            background-color: #243140;
+        }
+
+        #frame #sidepanel #contacts ul li.contact {
+            position: relative;
+            padding: 10px 0 15px 0;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #contacts ul li.contact {
+                padding: 6px 0 46px 8px;
+            }
+        }
+
+        #frame #sidepanel #contacts ul li.contact:hover {
+            background: #32465a;
+        }
+
+        #frame #sidepanel #contacts ul li.contact.active {
+            background: #32465a;
+            border-right: 5px solid #435f7a;
+        }
+
+        #frame #sidepanel #contacts ul li.contact.active span.contact-status {
+            border: 2px solid #32465a !important;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap {
+            width: 88%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #contacts ul li.contact .wrap {
+                width: 100%;
+            }
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap span {
+            position: absolute;
+            left: 0;
+            margin: -2px 0 0 -2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #2c3e50;
+            background: #95a5a6;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap span.online {
+            background: #2ecc71;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap span.away {
+            background: #f1c40f;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap span.busy {
+            background: #e74c3c;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap img {
+            width: 40px;
+            border-radius: 50%;
+            float: left;
+            margin-right: 10px;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #contacts ul li.contact .wrap img {
+                margin-right: 0px;
+            }
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap .meta {
+            padding: 5px 0 0 0;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #contacts ul li.contact .wrap .meta {
+                display: none;
+            }
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap .meta .name {
+            font-weight: 600;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap .meta .preview {
+            margin: 5px 0 0 0;
+            padding: 0 0 1px;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -moz-transition: 1s all ease;
+            -o-transition: 1s all ease;
+            -webkit-transition: 1s all ease;
+            transition: 1s all ease;
+        }
+
+        #frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {
+            position: initial;
+            border-radius: initial;
+            background: none;
+            border: none;
+            padding: 0 2px 0 0;
+            margin: 0 0 0 1px;
+            opacity: .5;
+        }
+
+        #frame #sidepanel #bottom-bar {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+        #frame #sidepanel #bottom-bar button {
+            float: left;
+            border: none;
+            width: 50%;
+            padding: 10px 0;
+            background: #32465a;
+            color: #f5f5f5;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #bottom-bar button {
+                float: none;
+                width: 100%;
+                padding: 15px 0;
+            }
+        }
+
+        #frame #sidepanel #bottom-bar button:focus {
+            outline: none;
+        }
+
+        #frame #sidepanel #bottom-bar button:nth-child(1) {
+            border-right: 1px solid #2c3e50;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #bottom-bar button:nth-child(1) {
+                border-right: none;
+                border-bottom: 1px solid #2c3e50;
+            }
+        }
+
+        #frame #sidepanel #bottom-bar button:hover {
+            background: #435f7a;
+        }
+
+        #frame #sidepanel #bottom-bar button i {
+            margin-right: 3px;
+            font-size: 1em;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #bottom-bar button i {
+                font-size: 1.3em;
+            }
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame #sidepanel #bottom-bar button span {
+                display: none;
+            }
+        }
+
+        #frame .content {
+            float: right;
+            width: 60%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame .content {
+                width: calc(100% - 58px);
+                min-width: 300px !important;
+            }
+        }
+
+        @media screen and (min-width: 900px) {
+            #frame .content {
+                width: calc(100% - 340px);
+            }
+        }
+
+        #frame .content .contact-profile {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background: #f5f5f5;
+        }
+
+        #frame .content .contact-profile img {
+            width: 40px;
+            border-radius: 50%;
+            float: left;
+            margin: 9px 12px 0 9px;
+        }
+
+        #frame .content .contact-profile p {
+            float: left;
+        }
+
+        #frame .content .contact-profile .social-media {
+            float: right;
+        }
+
+        #frame .content .contact-profile .social-media i {
+            margin-left: 14px;
+            cursor: pointer;
+        }
+
+        #frame .content .contact-profile .social-media i:nth-last-child(1) {
+            margin-right: 20px;
+        }
+
+        #frame .content .contact-profile .social-media i:hover {
+            color: #435f7a;
+        }
+
+        #frame .content .messages {
+            height: auto;
+            min-height: calc(100% - 120px);
+            max-height: calc(100% - 120px);
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame .content .messages {
+                max-height: calc(100% - 105px);
+            }
+        }
+
+        #frame .content .messages::-webkit-scrollbar {
+            width: 8px;
+            background: transparent;
+        }
+
+        #frame .content .messages::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        #frame .content .messages ul li {
+            display: inline-block;
+            clear: both;
+            float: left;
+            margin: 15px 15px 5px 15px;
+            width: calc(100% - 25px);
+            font-size: 0.9em;
+        }
+
+        #frame .content .messages ul li:nth-last-child(1) {
+            margin-bottom: 20px;
+        }
+
+        #frame .content .messages ul li.replies img {
+            margin: 6px 8px 0 0;
+        }
+
+        #frame .content .messages ul li.replies p {
+            background: #435f7a;
+            color: #f5f5f5;
+        }
+
+        #frame .content .messages ul li.sent img {
+            float: right;
+            margin: 6px 0 0 8px;
+        }
+
+        #frame .content .messages ul li.sent p {
+            background: #f5f5f5;
+            float: right;
+        }
+
+
+
+        #frame .content .messages ul li img {
+            width: 22px;
+            border-radius: 50%;
+            float: left;
+        }
+
+        #frame .content .messages ul li .attachment {
+            width: 30%;
+            border-radius: 10px;
+            border: 5px solid #435f7a;
+        }
+
+        #frame .content .messages ul li.sent .attachment {
+            border: 5px solid white;
+            background: #f5f5f5;
+            float: right;
+        }
+
+        #frame .content .messages ul li.replies .attachment {
+            border: 5px solid #435f7a;
+            background: #435f7a;
+            float: left;
+        }
+
+        #frame .content .messages ul li .attachment.other {
+            height: 60px;
+            border: none;
+            display: flex;
+            align-items: center;
+        }
+
+        #frame .content .messages ul li .attachment.other .format {
+            background: red;
+            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        #frame .content .messages ul li.sent .attachment.other .filename {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 10px;
+            font-weight: 500;
+
+        }
+
+        #frame .content .messages ul li.replies .attachment.other .filename {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 10px;
+            font-weight: 500;
+            color: white;
+        }
+
+        #frame .content .messages ul li p {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 205px;
+            line-height: 130%;
+        }
+
+        @media screen and (min-width: 735px) {
+            #frame .content .messages ul li p {
+                max-width: 300px;
+            }
+        }
+
+        #frame .content .message-input {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            z-index: 99;
+        }
+
+        #frame .content .message-input .wrap {
+            position: relative;
+        }
+
+        #frame .content .message-input .wrap input {
+            font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+            float: left;
+            border: none;
+            width: calc(100% - 90px);
+            padding: 11px 32px 10px 8px;
+            font-size: 0.8em;
+            color: #32465a;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame .content .message-input .wrap input {
+                padding: 15px 32px 16px 8px;
+            }
+        }
+
+        #frame .content .message-input .wrap input:focus {
+            outline: none;
+        }
+
+        #frame .content .message-input .wrap .attachment {
+            position: absolute;
+            right: 60px;
+            z-index: 4;
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #435f7a;
+            opacity: .5;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame .content .message-input .wrap .attachment {
+                margin-top: 17px;
+                right: 65px;
+            }
+        }
+
+        #frame .content .message-input .wrap .attachment:hover {
+            opacity: 1;
+        }
+
+        #frame .content .messages ul li .attachment {
+            width: 30%;
+            border-radius: 10px;
+            border: 5px solid #435f7a;
+        }
+
+        #frame .content .messages ul li.sent .attachment {
+            border: 5px solid white;
+            background: #f5f5f5;
+            float: right;
+        }
+
+        #frame .content .messages ul li .attachment.other {
+            height: 60px;
+            border: none;
+            display: flex;
+            align-items: center;
+        }
+
+        #frame .content .messages ul li.sent .attachment.other .format {
+            background: red;
+            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        #frame .content .messages ul li.sent .attachment.other .filename {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0px 10px;
+            font-weight: 500;
+        }
+
+
+        #frame .content .message-input .wrap button {
+            float: right;
+            border: none;
+            width: 50px;
+            padding: 12px 0;
+            cursor: pointer;
+            background: #32465a;
+            color: #f5f5f5;
+        }
+
+        @media screen and (max-width: 735px) {
+            #frame .content .message-input .wrap button {
+                padding: 16px 0;
+            }
+        }
+
+        #frame .content .message-input .wrap button:hover {
+            background: #435f7a;
+        }
+
+        #frame .content .message-input .wrap button:focus {
+            outline: none;
+        }
+
+
+        #myImg {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #myImg:hover {
+            opacity: 0.7;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content (image) */
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        /* Caption of Modal Image */
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        /* Add Animation */
+        .modal-content,
+        #caption {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 100% Image Width on Smaller Screens */
+        @media only screen and (max-width: 700px) {
+            .modal-content {
+                width: 100%;
+            }
+        }
+
+        .typing {
+            position: absolute;
+            top: 67%;
+            right: 90px;
+            display: none;
+        }
+
+        .ellipsis {
+            width: 5px;
+            height: 5px;
+            display: inline-block;
+            background: black;
+            border-radius: 50%;
+            animation: bounce 1.3s linear infinite;
+        }
+
+        .one {
+            animation-delay: 0.6s;
+        }
+
+        .two {
+            animation-delay: 0.5s;
+        }
+
+        .three {
+            animation-delay: 0.8s;
+        }
+
+        .bubble {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 5px;
+            color: black;
+            font-size: 0.7em;
+            padding: 10px 10px 10px 12px;
+            border-radius: 20px;
+        }
+
+
+        @keyframes bounce {
+            30% {
+                transform: translateY(-2px);
+            }
+
+            60% {
+                transform: translateY(0px);
+            }
+
+            80% {
+                transform: translateY(2px);
+            }
+
+            100% {
+                transform: translateY(0px);
+                opacity: 0.5;
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            color: white;
+            padding: 6px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-left: 25px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+    .messages{
+      //  flex : 1;
+      // transform: scale(1, -1);
+      //  overflow:auto;
+    }
+
+    .sent{
+       // transform: scale(1, -1);
+
+    }
+    .replies{
+       // transform: scale(1, -1);
+
+    }
+    </style>
+</head>
+
+<body>
+    <div id="frame">
+        <div id="sidepanel">
+            <div id="profile">
+                <div class="wrap">
+                    <img id="profile-img" src="https://bootdey.com/img/Content/avatar/avatar4.png" class="online"
+                        alt="" />
+                    <p class="agentname">Mike Ross</p>
+                    <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+                    <div id="status-options">
+                        <ul>
+                            <li id="status-online" class="active"><span class="status-circle"></span>
+                                <p>Online</p>
+                            </li>
+                            <li id="status-away"><span class="status-circle"></span>
+                                <p>Away</p>
+                            </li>
+                            <li id="status-busy"><span class="status-circle"></span>
+                                <p>Busy</p>
+                            </li>
+                            <li id="status-offline"><span class="status-circle"></span>
+                                <p>Offline</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="expanded">
+                        <label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+                        <input name="twitter" type="text" value="mikeross" />
+                        <label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+                        <input name="twitter" type="text" value="ross81" />
+                        <label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+                        <input name="twitter" type="text" value="mike.ross" />
+                    </div>
+                </div>
+            </div>
+            <div id="search">
+                <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+                <input type="text" placeholder="Search contacts..." id="searchbox" name="searchbox"/>
+            </div>
+
+            <span id="fromDate">
+                <input type="date" name="fromdata" id="fromdata" placeholder="From Date"  value=""/>
+            </span>
+            <span id="toDate">
+
+                <input type="date" placeholder="To Date" name="todate" id="todate" />
+            </span>
+
+            <div id="contacts">
+                <ul id="body_users">
+                    <li class="contact">
+                        <div class="wrap">
+                            <span class="contact-status online"></span>
+                            <img src="images/profile.png" alt="" />
+                            <div class="meta">
+                                <p class="name">No user</p>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- <li class="contact">
+                        <div class="wrap">
+                            <span class="contact-status busy"></span>
+                            <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Louis Litt</p>
+                                <p class="preview">You just got LITT up, Mike.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <span class="contact-status away"></span>
+                            <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Rachel Zane</p>
+                                <p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="wrap">
+                            <span class="contact-status"></span>
+                            <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+                            <div class="meta">
+                                <p class="name">Donna Paulsen</p>
+                                <p class="preview">Mike, I know everything! I\'m Donna..</p>
+                            </div>
+                        </div>
+                    </li> -->
+                </ul>
+                <ul id="assign_agent">
+                </ul>
+            </div>
+            <!-- <div id="bottom-bar">
+                <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add
+                        contact</span></button>
+                <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+            </div> -->
+            <div id="bottom-bar">
+                <button id="addcontact" onclick="agentdashboard()"><i class="fa fa-user-plus fa-fw"
+                        aria-hidden="true"></i> <span>Dashboard</span></button>
+                <button id="settings" onclick="logout()"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>
+                    <span>Logout</span></button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="contact-profile" >
+                <img src="images/profile.png" alt="" />
+                
+
+                <p class="name">Harvey Specter</p>
+                <div class="social-media">
+
+                    <!-- <button style="background-color: #2c3e50;margin: -5px;" onclick="allteam()">Transfer Agent</button>-->
+                </div>
+            </div>
+            <div class="messages" id="messages">
+                <ul>
+                    <!-- <li class="sent">
+                        <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                        <p>Hi
+                        </p>
+                    </li>
+                    <li class="replies">
+                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                        <p>Hello</p>
+                    </li>
+                    <li class="replies">
+                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                        <p></p>
+                    </li>
+                    <li class="sent">
+                        <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                        <p>
+                        </p>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+    
+    <!--  {{ room_name|json_script:"room-name" }}-->
+    <script>
+  
+        function agentdashboard() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const authT = urlParams.get("authT");
+            window.location = "agentdashboard.html?authT=" + authT;
+        }
+
+        function logout() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const authT = urlParams.get("authT");
+            $.ajax({
+                type: "Get",
+                url: "https://www.cybot.co/api/logout",
+                headers: {
+                    Authorization: "Token " + authT + "",
+                },
+                success: function (data) {
+                    window.location = "index.html";
+                },
+                error: function (data) {
+                    window.location = "index.html";
+                },
+            });
+        }
+
+        //setInterval(getMessages, 1000);
+
+        function allteam() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const authT = urlParams.get("authT");
+            window.location = "all_team.html?authT=" + authT;
+        }
+
+    </script>
+
+    <script>
+        function transfer() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const number = urlParams.get("number");
+            const authT = urlParams.get("authT");
+            const username = urlParams.get("username");
+            //window.location = "agenttransfer.html?customernumber="+number;
+            window.location = "agenttransfer.html?customernumber="+number + "&authT=" + authT + "&username=" + username;
+
+        }
+    </script>
+
+
+    <script>
+        // Get the modal
+        function openimage(id) {
+            var modal = document.getElementById("myModal");
+
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img = document.getElementById(id);
+            //alert(img);
+            var modalImg = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+        }
+
+
+    
+        
+        $(document).ready(function(){
+            chathistory();
+           
+            $('#todate').change(function(){
+                
+        
+		var fromdata = document.getElementById("fromdata").value;
+        var todate = document.getElementById("todate").value;
+		var Data = {"startdate": fromdata , "enddate": todate}
+	    const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const authT = urlParams.get('authT'); 
+       
+        $.ajax({
+            type: 'post',
+            url:'https://www.cybot.co/conversation',
+            data: Data,
+            dataType:'json',
+            "headers": {
+            "Authorization": "Token "+authT+""
+             },
+            success: function(result) {
+          
+                var values = result.data.length;                      
+                if (values > 0) {
+                    //console.log(result);
+                    var totallist = "";
+                    
+                    for(var i = 0;i < values; i++){             
+                        var mobile = result.data[i].mobile;
+                        var username = result.data[i].username;    
+                        var user_id = result.data[i].user_id; 
+                        var feedback = result.data[i].feedback;
+                       //var feedback = 5;
+                        //for(int j=0; j<=5; j++){}
+
+                        
+                        //code for stars(feedback)
+                        // $.fn.stars = function() {
+                        //     return $(this).each(function() {
+                        //         // Get the value
+                        //         var val = parseFloat($(this).html());
+                        //         // Make sure that the value is in 0 - 5 range, multiply to get width
+                        //         var size = Math.max(0, (Math.min(5, val))) * 16;
+                        //         // Create stars holder
+                        //         var $span = $('<span />').width(size);
+                        //         // Replace the numerical value with stars
+                        //         $(this).html($span);
+                        //     });
+                        // }
+
+                        var feedbackstar = "";
+                        for(var j = 0 ; j < feedback; j++ ){
+                               feedbackstar += "<span class='fa fa-star checked'> </span>"  ;
+                             //  console.log(feedbackstar);
+                        }
+                        
+
+                        var link = "agentChatHistory.html?userid="+user_id+"&fromdata="+fromdata +"&todate="+todate+"&authT="+authT;
+                        if(mobile!=null){
+                            var buffer = "<li class='contact active'>"+feedbackstar+"<a href="+encodeURI(link)+"  role='button'><div class='wrap'><span class='contact-status'></span><img src='images/profile.png' alt=''/><div class='meta'>";
+                            buffer += "<p class='name' style='color:#ecf0f1;'>" + mobile + "(" + username + ") </p></div></div></a></li>";
+                            totallist += buffer;
+                        }                      
+                    }
+                    document.getElementById("assign_agent").innerHTML = totallist;
+                } 
+            },
+            error: function (data, xhr, textStatus) {
+                if(xhr.status=="error"){
+                    alert("Session expired! Please login again");
+                    window.location.href =  "http://49.50.64.225:8080/clientadmin/login_1.html";
+                } 
+            },
+ 
+        }); 
+                
+            });
+            
+        });
+        function chathistory() {
+           
+           const queryString = window.location.search;
+           const urlParams = new URLSearchParams(queryString);
+           const authT = urlParams.get("authT");
+       //    console.log(authT);
+           const user_id = urlParams.get("userid");
+           const fromdata = urlParams.get("fromdata");
+           const todate = urlParams.get("todate");
+           
+           if(user_id === null || user_id === undefined || user_id ==="" ){
+
+           } else{
+            document.getElementById("fromdata").innerHTML =fromdata;
+            document.getElementById("todate").innerHTML =todate;
+               
+            var Data = {"startdate": fromdata , "enddate": todate};
+           
+            $.ajax({
+            type: 'post',
+            url:'https://www.cybot.co/conversation',
+            data: Data,
+            async: false,
+            dataType:'json',
+            "headers": {
+            "Authorization": "Token "+authT+""
+            },
+            success: function(result) {
+            //      $('li ul:empty').remove();
+                //   alert(result.data.length); 
+                //console.log(JSON.stringify(result));
+                var values = result.data.length;                      
+                if (values > 0) {
+                    console.log(result);
+                    var totallist = "";
+                    
+                    for(var i = 0;i < values; i++){             
+                        var mobile = result.data[i].mobile;
+                        var username = result.data[i].username;    
+                        var user_id = result.data[i].user_id; 
+                    //    user_id = "'" + user_id + "'";
+                    var link = "agentChatHistory.html?userid="+user_id+"&fromdata="+fromdata +"&todate="+todate+"&authT="+authT;
+                      
+                    if(mobile!=null){
+                            var buffer = "<li class='contact active'><a href="+link+"  role='button'><div class='wrap'><span class='contact-status'></span><img src='images/profile.png' alt=''/><div class='meta'>";
+                            buffer += "<p class='name' style='color:#ecf0f1;'>" + mobile + "(" + username + ")</p></div></div></a></li>";
+                            totallist += buffer;
+                        }                      
+                    }
+                    document.getElementById("assign_agent").innerHTML = totallist;
+                } 
+            },
+            error: function (data, xhr, textStatus) {
+                if(xhr.status=="error"){
+                    alert("Session expired! Please login again");
+                    window.location.href =  "http://49.50.64.225:8080/clientadmin/login_1.html";
+                }
+              
+          },
+ 
+        }); 
+
+
+
+            $.ajax({
+               "url": "https://www.cybot.co/wa/incoming?mobile=" + user_id,
+               "method": "GET",
+               "timeout": 0,
+               async: false,
+               "headers": {
+                   "Authorization": "Token " + authT + "",
+                   "Content-Type": "application/json",
+               },
+               success: function (res) {
+                 
+                   for (var i = 0; i < res.length; i++) {
+                       var agentname1 = res[i].agent;
+                       var username = res[i].user;
+                       var user_attachment = res[i].user_attachment;
+                       var agent_attachment = res[i].agent_attachment;
+                       var agent_media_type = res[i].agent_media_type;
+                       var user_media_type = res[i].user_media_type;
+                       var notification = res[i].notification;
+
+                       if (agent_attachment == null || agent_attachment == "") {
+                       } else {
+                           receiveAttachment(agent_attachment, agent_media_type, true);
+                       }
+
+                       if (user_attachment == null || user_attachment == "") {
+                       } else {
+
+                           receiveAttachment(user_attachment, user_media_type, false);
+                       }
+
+                       if (agentname1 == null || agentname1 == "") { } else {
+                           //  var number = res[0].username;
+                           receiveMessage(agentname1, true);
+                       }
+
+                       if (username == null || username == "") { } else {
+                           //  var number = res[0].username;
+                            receiveMessage(username);
+                       }
+
+                       if(notification == null|| notification == ""){
+
+                       }else{
+
+                           notification_msg(notification);
+                       }
+
+                       //    receiveMess age(data.message.text);
+                       $(".messages").stop({ scrollBottom: $('.messages')[0].scrollHeight }, "fast");
+                       
+                   
+                }                
+                    
+               },
+               error: function (data, xhr, textStatus) {
+                  if(xhr.status=="error"){
+                      alert("Session expired! Please login again");
+                      window.location.href =  "http://49.50.64.225:8080/clientadmin/login_1.html";
+                  }       
+               },
+ 
+           }); 
+        }
+       }
+       
+       function receiveMessage(message, self) {
+           
+            if (self) {
+                $('<li class="sent"><img src="images/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+                $('.contact.active .preview').html('<span>You: </span>' + message);
+            } 
+            else {
+                 $('<li class="replies"><img src="images/harveyspecter.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+                 $('.contact.active .preview').html('<span>Agent: </span>' + message);
+              }
+              $(".messages").stop({ scrollBottom: $('.messages')[0].scrollHeight }, "fast");
+        };
+
+        var username ="agent";
+        var idd = 1;
+        function receiveAttachment(message, type, self) {
+            // console.log(attachment);
+            
+            if (self) {
+                //    console.log("checcking attachment");
+                //  console.log(attachment);
+                if (type == "image") {
+                    $('<li class="sent"><img src="images/harveyspecter.png" alt="" /><img class="attachment image" src=' + message + ' id=' + idd + ' onclick="openimage(' + idd + ')"></li>').appendTo($('.messages ul'));
+                    $('.contact.active .preview').html(`<span>${username}: </span> Sent an image`);
+                } else if (type == 'video') {
+                    $('<li class="sent"><img src="images/harveyspecter.png" alt="" /><video class="attachment image"  src=' + message + ' controls></li>').appendTo($('.messages ul'));
+                    $('.contact.active .preview').html(`<span>${username}: </span> Sent a video`);
+                }
+                else if (type == "document") {
+                    //  console.log("images");
+                    $('<li class="sent"><img src="images/harveyspecter.png" alt="" /><div class="attachment other"><a href=' + message + ' target="_blank"><div class="format">DOC</div></a><div class="filename">Document file</div></li>').appendTo($('.messages ul'));
+                    $('.contact.active .preview').html(`<span>${username}: </span> Sent a document`);
+                }
+
+            } else {
+                if (type == "image") {
+                    $('<li class="replies"><img src="images/harveyspecter.png" alt="" /><img class="attachment image" src=' + message + ' id=' + idd + ' onclick="openimage(' + idd + ')"></li>').appendTo($('.messages ul'));
+                    $('.contact.active .preview').html(`<span>${username}: </span> Sent an image`);
+                } else if (type == 'video') {
+                    $('<li class="replies"><img src="images/harveyspecter.png" alt="" /><video class="attachment image"  src=' + message + ' controls></li>').appendTo($('.messages ul'));
+                    $('.contact.active .preview').html(`<span>${username}: </span> Sent a video`);
+                }
+                else if (type == "document") {
+                    // console.log("images");
+                    $('<li class="replies"><img src="images/harveyspecter.png" alt="" /><div class="attachment other"><a href=' + message.attachment + ' target="_blank"><div class="format">DOC</div></a><div class="filename">Document file</div></li>').appendTo($('.messages ul'));
+                    $('.contact.active .preview').html(`<span>${username}: </span> Sent a document`);
+                }
+
+            }
+            $(".messages").animate({ scrollTop: $('.messages')[0].scrollHeight }, "fast");
+            idd++;
+        }
+
+        // notiy
+        function notification_msg(message) {
+            // alert(self);
+         //   	console.log("notify"+message);
+                $('<li class="sent" style="margin: 5px -340px 28px;"><p>' + message + '</p></li>').appendTo($('.messages ul'));
+                $('.contact.active .preview').html('<span>You: </span>' + message);
+                $(".messages").animate({ scrollBottom: $('.messages')[0].scrollHeight }, "fast");
+        };
+
+        $(document).ready(function(){
+            onIdleTimeOut();
+            $("#searchbox").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#assign_agent li").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

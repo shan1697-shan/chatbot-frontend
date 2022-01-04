@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/leftheadernav.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      var username = localStorage["username"];
+      var Data = { user_id: username };
+      $.ajax({
+        type: "Post",
+        url: "https://www.cybot.co/api/usagereport",
+        data: Data,
+        dataType: "json",
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          //alert("dashboard::::"+JSON.stringify(data));
+
+          var email = data.email;
+          var sms = data.sms;
+          var incoming_chats = data.incoming_chats;
+          var resolved_chats = data.resolved_chats;
+          var active_chatbots = data.active_chatbots;
+          var users_online = data.users_online;
+          var customer_satisfaction = data.customer_satisfaction;
+          var first_response_time = data.first_response_time;
+          document.getElementById("first_reponse_time").innerHTML =
+            first_response_time;
+          document.getElementById("customer_satisfaction").innerHTML =
+            customer_satisfaction;
+        },
+        error: function (data) {
+          alert("Session Expire");
+          //	window.localStorage.removeItem('test');
+          //	window.open('index.html',"_self");
+        },
+      });
+    });
+  </script>
+  <style>
+    #tooltip {
+      position: relative;
+
+      border-bottom: 1px dotted black;
+    }
+
+    #tooltip #tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #f5cdcf;
+      color: #130f0f;
+      text-align: center;
+      border-radius: 6px;
+
+      position: absolute;
+      z-index: 1;
+
+      margin-left: -42px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #tooltip #tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    #tooltip:hover #tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="logobox"></div>
+      <ul>
+        <li href="" onclick="dashboard()" id="tooltip">
+          <span class="fa fa-creative-commons"></span>
+          <span class="tooltiptext" id="tooltiptext">Dashboard</span>
+        </li>
+
+        <li href="" onclick="domains()" id="tooltip"><span class="fa fa-book"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Add domains</span>
+        </li>
+        <li href="" onclick="quickLinks()" id="tooltip"><span class="fa fa-link"></span>
+          <span class="tooltiptext" id="tooltiptext">Quick links</span>
+        </li>
+        <li href="" onclick="addagent()" id="tooltip">
+          <span class="fa fa-user-o"></span>
+          <span class="tooltiptext" id="tooltiptext">Add Agents</span>
+        </li>
+        <li href="" onclick="reporting()" id="tooltip">
+          <span class="fa fa-bar-chart"></span>
+          <span class="tooltiptext" id="tooltiptext">Reporting</span>
+        </li>
+        <li href="" onclick="websitelink()" id="tooltip"><span class="fa fa-globe"></span>
+          <span class="tooltiptext" id="tooltiptext">website link</span>
+        </li>
+        <li href="" onclick="faq()" id="tooltip"><span class="fa fa-upload"></span>
+          <span class="tooltiptext" id="tooltiptext">Faq upload</span>
+
+        </li>
+
+        <li href="" onclick="trainbot()" id="tooltip"><span class="fa fa-cube"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+
+        </li>
+        <!--   <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li> -->
+        <li href="" onclick="setting()" id="tooltip"><span class="fa fa-cog"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Setting</span>
+        </li>
+      </ul>
+    </div>
+    <!-- left-panel -->
+    <div class="right-panel">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading">
+                  <a href="#" class="backbtn"></a>Dashboard
+                </h1>
+              </div>
+              <!-- col-md-5 -->
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li>
+                  <li><span class="fa fa-bell-o"></span></li>
+                  <li class="profile">
+                    <span class="profile-symble"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p id="username"><span>Active</span></p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- right-header -->
+      <div class="tabbox">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#app">APP</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#agents">AGENTS</a>
+          </li>
+        </ul>
+      </div>
+      <!-- tabbox -->
+      <div class="tabcontentbox">
+        <div class="tab-content">
+          <div id="app" class="tab-pane active">
+            <div class="filterbox">
+              <ul>
+                <li class="filterlist">Filter</li>
+                <li>User Guide</li>
+              </ul>
+            </div>
+            <div class="tab-iner-contentbox">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="whitbox">
+                    <h3>Agents</h3>
+                    <ul>
+                      <li class="border-right">
+                        <p><strong>0</strong><br />Online</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Active on IntelliAssign</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- col-md-4 -->
+                <div class="col-md-4">
+                  <div class="whitbox">
+                    <h3>Team Inbox</h3>
+                    <ul class="threebox-list">
+                      <li class="border-right">
+                        <p><strong>1</strong><br />Unassigned For</p>
+                        <select>
+                          <option>2 Mins</option>
+                        </select>
+                      </li>
+                      <li>
+                        <p>
+                          <strong>0</strong><br />Assigned & Not replied in
+                        </p>
+                        <select>
+                          <option>2 Mins</option>
+                        </select>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Assigned</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- col-md-4 -->
+                <div class="col-md-4">
+                  <div class="whitbox">
+                    <div class="dashboard-hed-box">
+                      <h3>Speed of Response</h3>
+                      <select>
+                        <option>Median</option>
+                      </select>
+                    </div>
+                    <ul class="fourbox-list">
+                      <li class="border-right">
+                        <p>
+                          <strong id="first_reponse_time">0</strong><br />First Response
+                        </p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Response Time</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Resolution Time</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Wait Time</p>
+                      </li>
+                    </ul>
+                    <div class="shomebox">
+                      <p>
+                        <span>Show me for the</span>
+                        <select>
+                          <option>Current Day</option>
+                        </select>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- col-md-4 -->
+                <div class="col-md-4 customer-sat">
+                  <div class="whitbox">
+                    <h2>Customer Satisfaction</h2>
+                    <p>
+                      Average rating based on all satisfactory interactions
+                      today : <strong id="customer_satisfaction"></strong>
+                    </p>
+                    <p class="star">
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                    </p>
+                    <p>
+                      Satisfactory interactions vs Unsatisfactory interactions
+                    </p>
+                    <p class="cust-sat-yes">
+                      <label>Yes</label><span></span>
+                    </p>
+                    <p class="cust-sat-no"><label>No</label><span></span></p>
+                  </div>
+                  <!-- whitbox -->
+                </div>
+                <!-- col-md-4 -->
+                <div class="col-md-8 graph">
+                  <div class="whitbox">
+                    <h2>Incoming Conversations</h2>
+                    <p>Graph</p>
+                    <div class="col-lg-10 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+                          <canvas id="scatterChart" style="height: 250px"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- whitbox -->
+                </div>
+                <!-- col-md-8 -->
+                <div class="col-md-6 admin-col6">
+                  <div class="whitbox">
+                    <div class="dashboard-hed-box">
+                      <h2>First Response Time</h2>
+                      <select>
+                        <option>Median</option>
+                      </select>
+                    </div>
+                    <p>Graph</p>
+                    <div class="col-lg-10 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+                          <canvas id="barChart" style="height: 230px"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- whitbox -->
+                </div>
+                <!-- col-md-6 -->
+                <div class="col-md-6 admin-col6">
+                  <div class="whitbox">
+                    <div class="dashboard-hed-box">
+                      <h2>Response Time</h2>
+                      <select>
+                        <option>Median</option>
+                      </select>
+                    </div>
+                    <p>Graph</p>
+                    <div class="col-lg-10 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+                          <canvas id="lineChart" style="height: 250px"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- whitbox -->
+                </div>
+                <!-- col-md-6 -->
+                <div class="col-md-6 admin-col6">
+                  <div class="whitbox">
+                    <div class="dashboard-hed-box">
+                      <h2>Resolution Time</h2>
+                      <select>
+                        <option>Median</option>
+                      </select>
+                    </div>
+                    <p>Graph</p>
+                    <div class="col-lg-10 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+                          <canvas id="lineChart1" style="height: 250px"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- whitbox -->
+                </div>
+                <!-- col-md-6 -->
+                <div class="col-md-6 admin-col6">
+                  <div class="whitbox">
+                    <div class="dashboard-hed-box">
+                      <h2>Incoming Conversations VS</h2>
+                      <select>
+                        <option>Resolved Conversations</option>
+                      </select>
+                    </div>
+                    <p>Graph</p>
+                    <div class="col-lg-10 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <h4 class="card-title"></h4>
+                          <canvas id="barChart1" style="height: 230px"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- whitbox -->
+                </div>
+                <!-- col-md-6 -->
+              </div>
+              <!-- row -->
+            </div>
+            <!-- tab-iner-contentbox -->
+          </div>
+          <!-- tab-pane -->
+          <div id="agents" class="tab-pane fade">
+            <div class="tab-iner-contentbox">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="whitbox">
+                    <h3>Agents</h3>
+                    <ul>
+                      <li class="border-right">
+                        <p><strong>0</strong><br />Online</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Active on IntelliAssign</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- col-md-4 -->
+                <div class="col-md-4">
+                  <div class="whitbox">
+                    <h3>Team Inbox</h3>
+                    <ul class="threebox-list">
+                      <li class="border-right">
+                        <p><strong>1</strong><br />Unassigned For</p>
+                        <select>
+                          <option>2 Mins</option>
+                        </select>
+                      </li>
+                      <li>
+                        <p>
+                          <strong>0</strong><br />Assigned & Not replied in
+                        </p>
+                        <select>
+                          <option>2 Mins</option>
+                        </select>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Assigned</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- col-md-4 -->
+                <div class="col-md-4">
+                  <div class="whitbox">
+                    <h3>Speed of Response</h3>
+                    <ul class="fourbox-list">
+                      <li class="border-right">
+                        <p><strong>0</strong><br />First Response</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Response Time</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Resolution Time</p>
+                      </li>
+                      <li>
+                        <p><strong>0</strong><br />Wait Time</p>
+                      </li>
+                    </ul>
+                    <div class="shomebox">
+                      <p>
+                        <span>Show me for the</span>
+                        <select>
+                          <option>Current Day</option>
+                        </select>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- col-md-4 -->
+
+                <div class="col-md-12">
+                  <div class="responsive-table">
+                    <table>
+                      <tr>
+                        <th>
+                          Team
+                          <select>
+                            <option>Alphabetica</option>
+                          </select>
+                        </th>
+                        <th>First Response Time</th>
+                        <th>Response Time</th>
+                        <th>Resolution Time</th>
+                        <th>Resolved Conversations</th>
+                        <th>Messages Sent</th>
+                        <th>Conversations Assigned</th>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- row -->
+            </div>
+            <!-- tab-iner-contentbox -->
+          </div>
+          <!-- tab-pane -->
+        </div>
+        <!-- tab-content -->
+      </div>
+      <!-- tabcontentbox -->
+    </div>
+    <!-- right-panel -->
+  </div>
+  <!-- main-container -->
+  <script src="js/vendor.bundle.base.js"></script>
+  <script src="js/vendor.bundle.addons.js"></script>
+  <script src="js/off-canvas.js"></script>
+  <script src="js/chart.js"></script>
+  <script type="text/javascript">
+    var charts = "";
+    var labels = "";
+    var jsonArr = [];
+    var labelarr = [];
+    var settings = {
+      url: "https://www.cybot.co/api/incommingchats",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Token 7a1177c05217136581f8138113639d601910f3f7",
+      },
+      processData: false,
+      data: '{\r\n    "startdate":"2021-05-07",\r\n    "enddate":"2021-05-12",\r\n    "user_id":"cyf"\r\n}',
+    };
+
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+      for (var i = 0; i < response.graph.length; i++) {
+        var chrt = response.graph[i].chats;
+
+        var lab = response.graph[i].date;
+        jsonArr.push(chrt);
+        labelarr.push(lab);
+        if (charts == "") {
+          charts = chrt;
+        } else {
+          charts += "," + chrt;
+        }
+
+        if (labels == "") {
+          labels = '"' + lab + '"';
+        } else {
+          labels += "," + '"' + lab + '"';
+        }
+        //  charts += response.graph[i].chats;
+        // labels += response.graph[i].date;
+      }
+      // alert("jsonArr :::"+jsonArr);
+      // alert("labels :::"+labels);
+    });
+
+    var labs = '"2021-05" ,"2021-05","2021-05","2021-05","2021-05","2021-05"';
+    var car = "4,5,80,11,2,8";
+    var data1 = {
+      labels: labelarr,
+      datasets: [
+        {
+          label: "",
+          data: jsonArr,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255,99,132,1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1,
+        },
+      ],
+    };
+
+    if ($("#barChart1").length) {
+      var barChartCanvas = $("#barChart1").get(0).getContext("2d");
+      // This will get the first returned node in the jQuery collection.
+      var barChart = new Chart(barChartCanvas, {
+        type: "bar",
+        data: data1,
+        options: options1,
+      });
+    }
+
+    var options1 = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+      legend: {
+        display: false,
+      },
+      elements: {
+        point: {
+          radius: 0,
+        },
+      },
+    };
+  </script>
+</body>
+
+</html>

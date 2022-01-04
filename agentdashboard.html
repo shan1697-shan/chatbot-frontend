@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/leftheadernav.js"></script>
+  <script src="js/common.js"></script>
+
+  <title>Agent Dashboard</title>
+  <style>
+    .container {
+      border: 2px solid #dedede;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .darker {
+      border-color: #ccc;
+      background-color: #ddd;
+    }
+  </style>
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      if (localStorage["adminbot"] == "valid") {
+        var username = localStorage["username"];
+        document.getElementById("username").innerHTML = username;
+      } else {
+        //    window.open("index.html", "_self");
+      }
+    });
+  function agentChatHostory(){
+    const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const authT = urlParams.get("authT");
+  window.location = "agentChatHistory.html?authT=" + authT;
+
+
+  }
+
+
+  function logout() {
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      $.ajax({
+        type: "Get",
+        url: "https://www.cybot.co/api/logout",
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          window.location = "login_1.html";
+        },
+        error: function (data) {
+          window.location = "login_1.html";
+        },
+      });
+    }
+  </script>
+  
+</head>
+
+<body>
+
+<div class="main-container">
+	<script> 
+		$(function(){
+		  $(".left-panel").load("include/left-menu.html"); 
+		});
+    </script>
+	
+	<div class="left-panel"></div>
+
+    <div class="right-panel right-bg chat-payment">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading">
+                  <a href="#" class="backbtn"></a>Agents Dashbaord
+                </h1>
+              </div>
+              <!-- col-md-5 -->
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li>
+                  <li><span class="fa fa-bell-o"></span></li>
+                  <li class="profile">
+                    <span class="profile-symble"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p id="username"><span>Active</span></p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <div class="dashboard-container">
+          <div class="flex-row">
+            <div class="left-content">
+
+              <!-- <h1>Agent Dashboard</h1>
+              <div class="newform">
+                <form>
+                  <ul class="newfullfrmbx">
+
+                    <li>
+                      <input type="text" placeholder="Search Domains">
+                    </li>
+                    <li>
+                      <div class="responsive-table">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <th>User Name</th>
+                              <th>Role</th>
+                              <th>Status</th>
+                            </tr>
+                            <tr>
+                              <td>Greetings</td>
+                              <td>Generic</td>
+                              <td>online</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ul>
+
+                </form>
+              </div>newform -->
+              <h1>Customer Assigned</h1>
+              <div class="newform">
+                <form>
+                  <ul class="newfullfrmbx">
+                    <li style="width:100%;">
+                      <div class="responsive-table">
+
+                        <table>
+                          <tbody id="body_users">
+                            <!-- <tr>
+                              <th>User Mobile No.</th>
+                              <th>Chat Link</th>
+                            </tr>
+                            <div id="users_assigned">
+
+                            </div> -->
+                            <!-- <tr>
+                              <td>Greetings</td>
+                              <td>Generic</td>
+                            </tr> -->
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ul>
+
+                </form>
+              </div><!-- newform -->
+            </div><!-- left-content -->
+			
+			
+			<div class="right-content">
+			<h1>Customer To other</h1>
+			<!-- <h1>agent</h1> -->
+                <form>
+                  <ul class="newform">
+                    <li style="width:100%;">
+                      <div class="responsive-table">
+                        <table>
+                          <tbody id="assign_agent">
+                             
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ul>
+
+                </form>
+              </div>
+            <!-- <div class="chatbotbox">
+              <div class="trainstatus">
+                <ul>
+                  <li>
+                    <p>Chat <br>Window</p>
+                  </li>
+                  <li><span>chat user</span></li>
+                </ul>
+              </div> -->
+              <!-- <div class="chatbox-content">
+                <div id="msgval"> -->
+                  <!--	<div class="container">
+						  
+						  <p>Hello. How are you today?</p>
+						  <span class="time-right">11:00</span>
+						</div>
+
+						<div class="container darker">
+						  
+						  <p>Hey! I'm fine. Thanks for asking!</p>
+						  <span class="time-left">11:01</span>
+						</div> -->
+                <!-- </div>
+              </div> -->
+              <!-- <div class="chatbox-btn">
+
+                <input type="text" name="" placeholder="Text Here" id="gettextval">
+
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+              </div> -->
+            </div>
+          </div><!-- flex-row -->
+        </div><!-- dashboard-container -->
+		
+		
+      </div><!-- right-panel -->
+    </div><!-- main-container -->
+    <script type="text/javascript">
+      //   var myVar = setInterval(getAssignedUser, 7000);
+         var myVar = setInterval(smswithalert, 15000);
+         var myVar_1 = setInterval(allgent, 15000);
+          
+     
+     
+           //var questionNum = 0;													// keep count of question, used for IF condition.
+           //var question = '<h1>what is your name?</h1>';				  // first question
+     
+           //var output = document.getElementById('output');				// store id="output" in output variable
+           //output.innerHTML = question;													// ouput first question
+     
+           function bot() {
+             var input = document.getElementById("gettextval").value;
+             document.getElementById("gettextval").value = "";
+             var dynDiv = '<div class="container">' +
+               '<p>' + input + '</p>' +
+               '</div>';
+     
+             $("#msgval").append(dynDiv);
+             //document.getElementById("gettextval").value ="";
+          ///   getchatbox();
+           }
+     
+           function timedQuestion() {
+             output.innerHTML = question;
+           }
+     
+           //push enter key (using jquery), to run bot function.
+           $(document).keypress(function (e) {
+             if (e.which == 13) {
+               bot();																						// run bot function when enter key pressed
+               // questionNum++;																		// increase questionNum count by 1
+             }
+           });
+           function getchatbox() {
+             const queryString = window.location.search;
+             const urlParams = new URLSearchParams(queryString);
+             const authT = urlParams.get('authT');
+             var Data = { "user_id": "a102384b-a843-41f4-95b1-da59e831962a" }
+             $.ajax({
+               type: 'GET',
+               url: 'https://www.cybot.co/api/convo?user_id=a102384b-a843-41f4-95b1-da59e831962a',
+               //	data: Data,
+               dataType: 'json',
+     
+               success: function (data) {
+                 // alert(data.response);
+                 Toast.fire({
+                   icon: 'success',
+                   title: data.response
+                 })
+               },
+               error:function(jqXHR, textStatus, errorThrown) { 
+                  if(jqXHR.status==401){
+                      alert("Session expired! Please login again");
+                      logout();
+                  }else{
+                      alert("Internal Server Issue");
+                      //logout();
+                  }
+              },
+             });
+           }
+     
+           function smswithalert() {
+             
+                  const chat1 =  "room1.html";
+                 const queryString = window.location.search;
+                 const urlParams = new URLSearchParams(queryString);
+                 const authT = urlParams.get("authT");
+                
+                 try {
+     
+                     $.ajax({
+                         type: "GET",
+                         url: "https://www.cybot.co/api/smsalert",
+                         dataType: "json",
+                         processData: false,
+                         headers: {
+                             Authorization: "Token " + authT + "",
+                         },
+                         success: function (data) {
+                             if (data.length > 0) {
+                            
+                                 var totallist = "";
+                                 var buffer = "<tr><th>Customer Mobile No.</th><th>Chat Link</th><th>Transfer Agent</th></tr>"
+                                 for (var i = 0; i < data.length; i++) {
+                                     var mobile = data[i].mobile;
+                                     var mobile_no = data[i].mobile_no;
+                                     var  numb = "'"+mobile +"'";
+                                     var mobile_send = data[i].mobile;
+                                     if (mobile.length >= 18) {
+                                       mobile =mobile_no;
+                                    
+                                     }
+                                     var msg = data[i].msg;
+                                     var username = data[i].username;
+                                     var link = chat1+"?username="+localStorage.getItem("username")+"&number="+mobile_send+"&authT="+authT;
+                                     
+                                    buffer += "<tr>"+
+                     "<td style='width: fit-content;'>" +mobile + "</td>" +
+                     // "<td>" +  chat + data[i].assigned_room + "</td>"
+                  
+                     "<td><a href="+link+" class='btn btn-primary btn-lg active' role='button' aria-pressed='true'>Active Chat</a></td>"+
+                     "<td><a href='#' class='btn btn-primary btn-lg active'  role='button' aria-pressed='true' onclick=openagent("+numb+")>Transfer</a></td>"
+                               "</tr>"
+                                  
+                                 }
+                                 document.getElementById("body_users").innerHTML = buffer;  
+                             } else {
+                               document.getElementById("body_users").innerHTML = "No Agents assigned.";  
+                             }
+     
+                         },
+                         error:function(jqXHR, textStatus, errorThrown) {  
+                          if(jqXHR.status==401){
+                                alert("Session expired! Please login again");
+                                logout();
+                            }else{
+                                alert("Internal Server Issue");
+                                //logout();
+                            }
+                        },
+                      });
+     
+                 } catch (e) {
+                   
+                 }
+     
+             }
+           function getAssignedUser() {
+             // https://cybot.co/chatroom/918299534933/
+             const chat =  "https://cybot.co/chatroom/dashboard/";
+             const chat1 =  "room1.html";
+             const queryString = window.location.search;
+             const urlParams = new URLSearchParams(queryString);
+             const authT = urlParams.get("authT");
+             $.ajax({
+               type: "GET",
+               url: "https://www.cybot.co/api/human",
+               dataType: "json",
+               processData: false,
+               headers: {
+                 Authorization: "Token " + authT + "",
+               },
+               success: function (data) {
+                 
+                 
+                 var x = data[0].list_numbers;
+                 var numbers = x.split(";");
+     
+               if (numbers.length > 0) {
+                 var buffer = "<tr><th>Customer Mobile No.</th><th>Chat Link</th><th>Transfer Agent</th></tr>";
+                 for (var i = 0; i < numbers.length; i++) {
+                   var checknumber = numbers[i];
+                   if(checknumber == ""){} else{
+             var link = chat1+"?username="+localStorage.getItem("username")+"&number="+numbers[i]+"&authT="+authT;
+             var  numb = "'"+numbers[i] +"'";
+                   buffer += "<tr>"+
+                     "<td style='width: fit-content;'>" + numbers[i] + "</td>" +
+                     // "<td>" +  chat + data[i].assigned_room + "</td>"
+     
+                     "<td><a href="+link+" class='btn btn-primary btn-lg active' role='button' aria-pressed='true'>Active Chat</a></td>"+
+                     "<td><a href='#' class='btn btn-primary btn-lg active'  role='button' aria-pressed='true' onclick=openagent("+numb+")>Agent Name</a></td>"
+             "</tr>"
+                 }  }
+                 document.getElementById("body_users").innerHTML = buffer;
+               } else {
+                 document.getElementById("body_users").innerHTML = "No Agents assigned.";
+               }
+     
+               },
+               error:function(jqXHR, textStatus, errorThrown) { 
+                  if(jqXHR.status==401){
+                      //alert("Session expired! Please login again");
+                      //logout();
+                  }else{
+                      alert("Internal Server Issue");
+                      //logout();
+                  }
+              },
+             });
+           }
+     
+     function allgent(){
+             const queryString = window.location.search;
+             const urlParams = new URLSearchParams(queryString);
+             const authT = urlParams.get("authT");
+     $.ajax({
+               type: "GET",
+               url: "https://www.cybot.co/api/allchats",
+               dataType: "json",
+               processData: false,
+               headers: {
+                 Authorization: "Token " + authT + "",
+               },
+               success: function (data) {
+                
+               if (data.length > 0) {
+           
+                 var totallist ="";
+            var buffer = "<tr><th>Customer Mobile No.</th><th>Agent</th></tr>";
+                 for (var i = 0; i < data.length; i++) {
+         //	var link = chat1+"?username="+localStorage.getItem("username")+"&number="+numbers[i]+"&authT="+authT;
+           //  var link = chat1 + numbers[i]+"?username="+localStorage.getItem("username")+"&number="+numbers[i];
+           var mobile=data[i].mobile;
+           var mobile_no = data[i].mobile_no;
+                   if (mobile.length >= 18) {
+                                       mobile =mobile_no;
+                                     }
+           var agent= data[i].agent;
+     
+                   buffer += "<tr>"+
+                     "<td>" + mobile + "</td>" +
+                     // "<td>" +  chat + data[i].assigned_room + "</td>"
+                     "<td>"+agent+"</a></td>"
+                     
+             "</tr>"
+            
+           
+                 }
+                 document.getElementById("assign_agent").innerHTML = buffer;
+               } else {
+              //   document.getElementById("assign_agent").innerHTML = "No Agents assigned.";
+               }
+     
+               },
+              error:function(jqXHR, textStatus, errorThrown) { 
+                  if(jqXHR.status==401){
+                      //alert("Session expired! Please login again");
+                      //logout();
+                  }else{
+                      alert("Internal Server Issue");
+                      //logout();
+                  }
+              },
+             });
+     }
+     
+     
+           $(document).ready(function () {
+             smswithalert();
+             allgent();
+             //onIdleTimeOut();
+           });
+     
+     
+     function openagent(mobileno)
+     {
+     //alert("");
+     const queryString = window.location.search;
+       const urlParams = new URLSearchParams(queryString);
+       const authT = urlParams.get("authT");
+       window.location = "agenttransfer.html?authT="+authT+"&customernumber="+mobileno;
+     
+     
+     }
+     
+     function allteam() {
+       const queryString = window.location.search;
+       const urlParams = new URLSearchParams(queryString);
+       const authT = urlParams.get("authT");
+       window.location = "all_team.html?authT=" + authT;
+     }
+     
+     function reportagent() {
+       const queryString = window.location.search;
+       const urlParams = new URLSearchParams(queryString);
+       const authT = urlParams.get("authT");
+      
+       window.location = "https://cybot.co/datauser"
+       target = "_blank";
+         done = 1;
+     }
+         </script>
+             <div class="modal fade" id="ajax" role="dailog" 
+										labelledby="myModalLabel">
+										<div class="modal-dialog modal-full">
+											<div class="modal-content">
+												<div class="modal-body">
+													<span>
+														&nbsp;&nbsp;Loading... </span>
+												</div>
+												   <div class="modal-footer">
+     				   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>
+											</div>
+										</div>
+									</div>
+</body>
+
+</html>
+<!-- <script type="text/javascript">
+    $(document).ready(function () {
+        $(".newform li").each(function () {
+            $(this).has("textarea").addClass('fullli');
+        });
+
+        $(".leftnav > li").each(function () {
+            $(this).has("ul").addClass('submenu');
+            $(this).has("ul").click(function (e) {
+                if ($(this).hasClass('subnavactive')) {
+                    $(this).removeClass('subnavactive').children('ul').slideUp();
+                }
+                else {
+                    $(".leftnav > li").removeClass('subnavactive').children('ul').slideUp();
+                    $(this).addClass('subnavactive').children('ul').slideDown();
+                }
+            });
+        });
+
+    });
+</script> -->

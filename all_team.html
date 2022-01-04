@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+  <script src="js/jquery-main.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script src="js/common.js"></script>
+
+  <title>All Agents</title>
+
+  <script type="text/javascript">
+    var myVar_1 = setInterval(onlineAgents(), 600000);
+
+    $(document).ready(function () {
+        onlineAgents();
+    });
+
+    function onlineAgents(){
+      
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      var username = localStorage["usernameagent"];
+      var Data = { user_id: "cyf" };
+      $.ajax({
+        type: "GET",
+        url: "https://www.cybot.co/api/human-agents?user_id=" + username,
+        dataType: "json",
+        processData: false,
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          var KeyValueData = tableData(data);
+          var drawdata = { data: KeyValueData };
+          
+          document.getElementById("totalrow").value = KeyValueData.length;
+
+          table = $("#domainsdata").DataTable({
+            processing: true,
+            autoWidth: false,
+            data: drawdata.data,
+            scrollY: 380,
+            scrollX: true,
+            paging: false,
+            ordering: false,
+            columns: [
+              { data: "id" },
+              { data: "name" },
+              { data: "company" },
+              { data: "nochat" },
+             
+              {
+                  data: "online",	
+                  render: function (data, type, row) {
+                  if(data =='offline'){
+                    return '<span style="color:red;">'+data+'</span>';
+                  }else{
+                        return '<span style="color:green;">'+data+'</span>';
+                  }
+                }
+              }
+            
+
+			      ],
+            order: [[0, "desc"]],
+          });
+        },
+        error:function(jqXHR, textStatus, errorThrown) { 
+            if(jqXHR.status==401){
+                alert("Session expired! Please login again");
+                logout();
+            }else{
+                alert("Internal Server Issue");
+                //logout();
+            }
+        },
+      });
+
+    }
+
+    function tableData(result) {
+      var datalist = new Array();
+      var id = 1;
+      for (var i = 0; i < result.length; i++) {
+	    
+        var name = result[i].human_agent;
+        var company = result[i].company;
+        var nochat = result[i].no_of_chats;
+        var online_1 = result[i].online;
+        if(online_1 ==true){
+        online_1="online";
+
+        }else{
+
+          online_1="offline";
+
+        }
+		   var count ="";
+       datalist[i] = {"id":id ,"name":name,"company":company,"nochat":nochat,"online":online_1,"count":count};
+        id++;
+      }
+      return datalist;
+    }
+	function downloadfile(){
+    var fromdata = document.getElementById("fromdata").value;
+    var todate = document.getElementById("todate").value;
+	var totalrow = document.getElementById("totalrow").value;
+	var allgents ="";
+	
+	for(var j=0 ;j<totalrow;j++){
+    var check=  document.getElementById(j+1).checked;
+    if(check){
+    var agentval= document.getElementById(j+1).value;
+	
+	if(allgents== ""){
+	allgents += agentval;
+	}else{
+	allgents += ","+agentval;
+	}
+}
+	
+	}
+	     const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const authT = urlParams.get("authT");
+		var Data ={"agent":allgents,"from":fromdata,"to":todate};
+	$.ajax({
+          type: "post",
+          url: "https://www.cybot.co/api/wareport",
+          data: Data,
+          dataType: "json",
+		//  contentType: 'application/json; charset=utf-8',
+          headers: {
+            Authorization: "Token " + authT + "",
+          },
+          success: function (data) {
+		  
+		  //  window.location.href = data.data ;
+          },
+          error: function (data) {
+		      window.location.href = data.data ;
+          },
+        });
+	
+	
+       
+	}
+	
+function dashboard() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const authT = urlParams.get("authT");
+  window.location = "agentdashboard.html?authT=" + authT;
+}
+
+function allteam() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const authT = urlParams.get("authT");
+  window.location = "all_team.html?authT=" + authT;
+}
+
+$(document).ready(function () {
+      $.fn.dataTableExt.sErrMode = 'throw';     //this line is to remove datatable warning alert
+      onIdleTimeOut();
+      if (localStorage["adminbot"] == "valid") {
+        var username = localStorage["username"];
+        document.getElementById("username").innerHTML = username;
+      } else {
+        //    window.open("index.html", "_self");
+      }
+    });
+
+function logout() {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const authT = urlParams.get("authT");
+      $.ajax({
+        type: "Get",
+        url: "https://www.cybot.co/api/logout",
+        headers: {
+          Authorization: "Token " + authT + "",
+        },
+        success: function (data) {
+          window.location = "login_1.html";
+        },
+        error: function (data) {
+          window.location = "login_1.html";
+        },
+      });
+    }
+
+  </script>
+  <style>
+    #tooltip {
+      position: relative;
+
+      border-bottom: 1px dotted black;
+    }
+
+    #tooltip #tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #f5cdcf;
+      color: #130f0f;
+      text-align: center;
+      border-radius: 6px;
+
+      position: absolute;
+      z-index: 1;
+
+      margin-left: -42px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    #tooltip #tooltiptext::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #555 transparent transparent transparent;
+    }
+
+    #tooltip:hover #tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+<input type="hidden" id="totalrow" value="">
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="logobox"></div>
+      <ul>
+        <li href="" onclick="dashboard()" id="tooltip">
+          <span class="fa fa-creative-commons"></span>
+          <span class="tooltiptext" id="tooltiptext">Dashboard</span>
+        </li>
+        <li href="" onclick="allteam()" id ="tooltip">
+          <span class="fa fa-user-o"></span>
+    <span class="tooltiptext" id="tooltiptext">Agent online</span>
+        </li>
+
+        <!-- <li href="" onclick="trainbot()" id="tooltip"><span class="fa fa-cube"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Csv Trained</span>
+
+        </li>
+          <li><span class="fa fa-bullhorn"></span></li>
+          <li><span class="fa fa-bookmark-o"></span></li>
+        <li href="" onclick="setting()" id="tooltip"><span class="fa fa-cog"></span>
+
+          <span class="tooltiptext" id="tooltiptext">Setting</span>
+        </li> -->
+      </ul>
+    </div>
+    <!-- left-panel -->
+    <div class="right-panel right-bg chat-payment">
+      <div class="right-header">
+        <div class="row">
+          <div class="col-md-12 borderbtm">
+            <div class="row align-items-center">
+              <div class="col-md-5">
+                <h1 class="mainheading"><a href="#" class="backbtn"><span class="fa fa-angle-left"></span></a></h1>
+              </div><!-- col-md-5 -->
+              <div class="col-md-7 rhead-search">
+                <ul>
+                  <!--li class="search">
+                    <button class="fa fa-search"></button>
+                    <input type="text" name="" />
+                  </li>
+                  <li><span class="fa fa-gift"></span></li-->
+				 
+                  <!--li><span class="fa fa-bell-o"></span></li-->
+                  <li class="profile">
+                    <span class="profile-symble"></span><span class="fa fa-angle-down"></span>
+                    <ul class="profile-dropdown">
+                      <li>
+                        <a href="#"><span class="profileimg">N<i class="fa fa-user" aria-hidden="true"></i>
+                          </span>
+                          <p id="username"><span>Active</span></p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-toggle-on"></span>Set inactive
+                          on IntelliAssign</a>
+                      </li>
+                      <li>
+                        <a href="#"><span class="fa fa-user-o"></span>Profile
+                          Settings</a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="logout()"><span class="fa fa-sign-out"></span> Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div><!-- col-md-7 -->
+            </div>
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- right-header -->
+      <div class="col-md-12">
+        <div class="row agentsetingbox">
+         
+          <div class="col-md-9 greybg">
+            <h2>All Agents Online</h2>
+		
+      
+            <div class="responsive-table">
+              <table id="domainsdata">
+                <thead>
+                  <tr>
+                    <th>Sno.</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>No of chat</th>
+                    <th>Status</th>
+					           
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+					<td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- responsive-table -->
+          </div>
+          <!-- col-md-8 -->
+        </div>
+      </div>
+    </div>
+    <!-- right-panel -->
+  </div>
+  <!-- main-container -->
+</body>
+
+</html>

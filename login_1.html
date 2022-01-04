@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+    <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+    <script src="https://use.typekit.net/hoy3lrg.js"></script>
+    <script src="js/jquery-main.js"></script>
+    <title>Login</title>
+    <script type="text/javascript">
+      function logout() {
+        window.location = "index.html";
+      }
+    </script>
+	 <script type="text/javascript">
+	$(document).ready(function() { 
+		  $("#showHide").click(function() {//alert("");  
+		    if ($("#password").attr("type") == "password") {
+		      $("#password").attr("type", "text");
+		      $("#showHide").html("<img src='images/logo/hide.png' style='width: 20px;'>");
+		    } else {
+		      $("#password").attr("type", "password");
+		      $("#showHide").html("<img src='images/logo/eye.png' style='width: 20px;'>");
+		    
+		    } 
+		  });
+		});
+	</script> 
+  </head>
+  <body>
+    <form>
+    <div class="main-container align-items-center loginpage">
+      <div class="login-left">
+        <div class="logobox">
+          <img src="images/logo.png" />
+        </div>
+        <!--p><strong>Text to be updated.</strong></p-->
+        <!-- <div class="login-icon">
+           	<img src="images/logo-icon.jpg">
+           </div>  -->
+        <!-- login-icon -->
+        <!--div class="loginbtm-content">
+          <p>Text to be updated.</p>
+        </div-->
+      </div>
+      <!-- left-panel -->
+      <div class="login-right">
+        <div class="loginbox">
+          <h2>Login</h2>
+          <ul>
+            <li>
+              <input type="text" name="" placeholder="username" id="login" />
+            </li>
+            <li>
+              <input type="password" name="password" id="password" placeholder="*******"/>
+			   <a style="position: absolute !important;top:18px;right: 0;text-decoration: none;cursor: pointer;color: #a9d198" id="showHide"><img src="images/logo/eye.png" style="width: 20px;"> <!--span id="eyeOnForgetPassword" toggle="#password-field" class="fa fa-fw field-iconForPassword toggle-password fa-eye-slash"></span--></a> 
+            </li>
+            <li class="forgot">
+              <span><input type="checkbox" /> Keep me logged in</span
+              ><span><a href="forgetPassword.html">Forgot Password</a></span>
+            </li>
+            <li class="submitlist">
+              <input type="button" name="myButton" value="submit" onclick="validatelogin()" />
+            </li>
+            <li class="login-terms">
+              <!-- <p>Sign Up</p> -->
+              <a href="register.html">Create an Account</a> </li>
+            <div
+              align="center"
+              id="msgbox"
+              style="display: block; color: red"
+            ></div>
+            <!-- <li class="login-or"><span>OR</span></li>
+	            	<li class="g-login"><span class="fa fa-google"></span><input type="text" placeholder="Sign in with google" name=""></li> -->
+          </ul>
+        </div>
+        <!-- <p class="copywrit">Text to be updated.</p> -->
+      </div>
+      <!-- login-right -->
+    </div>
+    </form>
+    <!-- main-container -->
+    <script>
+      function validatelogin() {
+	   localStorage["username"] = "";
+        var username = document.getElementById("login").value;
+        var password = document.getElementById("password").value;
+
+        var Data = { username: username, password: password };
+
+        $.ajax({
+          type: "Post",
+          url: "https://www.cybot.co/api/login/",
+          data: JSON.stringify(Data),
+          dataType: "json",
+          contentType: "application/json",
+          success: function (data) {
+            //console.log("Send Vendor OTP Response : "+JSON.stringify(data));
+
+            var checkcompany = data.user_type;
+
+           if (checkcompany == "human_agent") {
+         //localStorage["adminbot"] = "valid";
+                localStorage["username"] = username;
+                var Auth_Token = data.token;
+                window.location = "agentdashboard.html?authT=" + Auth_Token;
+              }
+
+          else if (checkcompany == "company") {
+              var checkplan = data.subscribed;
+
+              if (checkplan == false) {
+                var Auth_Token = data.token;
+				 localStorage["username"] = username;
+				// alert("username :::"+username);
+                window.location = "sub.html?authT=" + Auth_Token;
+              } else {
+                localStorage["adminbot"] = "valid";
+                localStorage["username"] = username;
+                var Auth_Token = data.token;
+                window.location = "dashboard.html?authT=" + Auth_Token;
+              }
+            } 
+			
+		else {
+              localStorage["adminbot"] = "valid";
+              localStorage["username"] = username;
+              var Auth_Token = data.token;
+              window.location = "dashboard.html?authT=" + Auth_Token;
+            }
+          },
+          error: function (data) {
+            document.getElementById("msgbox").innerHTML =
+              "username or password is wrong";
+            //	alert('username or password is wrong');
+          },
+        });
+      }
+
+      $("#password,#login").keypress(function(event) {
+          if (event.keyCode === 13) {
+              validatelogin();
+          }
+      });  
+    </script>
+  </body>
+</html>
